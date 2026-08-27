@@ -201,7 +201,7 @@ export default function Home({ initialLanguage = "es" }: { initialLanguage?: Lan
       </section>
 
       <section className="map-section" id="ubicacion" aria-labelledby="map-heading">
-        <div className="map-copy"><p className="eyebrow">{c.mapEyebrow}</p><h2 id="map-heading">{c.mapTitle}</h2><p>{c.mapText}</p><a className="button-solid" href="https://www.google.com/maps/search/?api=1&query=Paseo%20de%20la%20Costa%2C%20Neuqu%C3%A9n%2C%20Argentina" target="_blank" rel="noreferrer"><MapPinned size={17} />{c.routeCta}</a><p className="map-coords">38° 58′ 45″ S · 68° 03′ 22″ O</p></div>
+        <div className="map-copy"><p className="eyebrow">{c.mapEyebrow}</p><h2 id="map-heading">{c.mapTitle}</h2><p>{c.mapText}</p><a className="button-solid" href="https://maps.app.goo.gl/rVB9GRmjSuwGKSyJ8" target="_blank" rel="noreferrer"><MapPinned size={17} />{c.routeCta}</a><p className="map-coords">38° 58′ 45″ S · 68° 03′ 22″ O</p></div>
         <div className="map-frame"><iframe title="Paseo de la Costa en Neuquén" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5516.618733068807!2d-68.05618952252352!3d-38.97917527170686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x960a32203113e6c7%3A0x1ec9e5b4b83d4aa7!2sPaseo%20de%20la%20Costa!5e1!3m2!1ses-419!2sar!4v1787793759333!5m2!1ses-419!2sar" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen /></div>
       </section>
 
