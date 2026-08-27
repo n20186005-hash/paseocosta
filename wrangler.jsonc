@@ -1,0 +1,6 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "paseo-de-la-costa-guia",
+  "assets": { "directory": "./dist" },
+  "compatibility_date": "2026-08-27"
+}
