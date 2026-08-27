@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Home from "../components/Home";
+const attractionSchema = {
+  "@context": "https://schema.org",
+  "@type": ["TouristAttraction", "LocalBusiness"],
+  name: "Paseo de la Costa",
+  description: "Paseo costero público de baja dificultad junto al río Limay, en Neuquén, Argentina.",
+  address: { "@type": "PostalAddress", addressLocality: "Neuquén", addressRegion: "Neuquén", addressCountry: "AR" },
+  geo: { "@type": "GeoCoordinates", latitude: -38.97917527170686, longitude: -68.05618952252352 },
+  isAccessibleForFree: true,
+  openingHoursSpecification: { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], opens: "00:00", closes: "23:59", description: "Espacio exterior de acceso público; los servicios y actividades específicos pueden tener horarios propios." },
+};
+const faqSchema = {
+  "@context": "https://schema.org", "@type": "FAQPage", mainEntity: [
+    { "@type": "Question", name: "¿Se paga entrada?", acceptedAnswer: { "@type": "Answer", text: "No se informa una entrada general para el paseo como espacio público. Eventos y actividades específicas pueden tener sus propias condiciones." } },
+    { "@type": "Question", name: "¿Cuánto tiempo necesito?", acceptedAnswer: { "@type": "Answer", text: "Para una primera visita, entre una y dos horas permite caminar un tramo con pausas." } },
+    { "@type": "Question", name: "¿Hay baños?", acceptedAnswer: { "@type": "Answer", text: "Existe un módulo de baños públicos informado para un tramo del Paseo Costero Río Limay cercano a Club Unipol. Consultá en el día la disponibilidad y el horario." } },
+  ]
+};
+---
+<BaseLayout title="Paseo de la Costa · Guía de Neuquén" description="Guía independiente y bilingüe para recorrer Paseo de la Costa, Neuquén, Argentina." path="/">
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(attractionSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  <Home initialLanguage="es" />
+</BaseLayout>

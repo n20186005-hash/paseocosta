@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Paseo de la Costa">
+  <rect width="64" height="64" rx="14" fill="#F1E8D5"/>
+  <path d="M13 12c18 5 22 16 19 40M51 12C33 17 29 28 32 52" fill="none" stroke="#075B73" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="32" cy="45" r="4" fill="#B56B40"/>
+</svg>
