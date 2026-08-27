@@ -169,14 +169,14 @@ export default function Home({ initialLanguage = "es" }: { initialLanguage?: Lan
     <SiteHeader language={language} />
     <main id="contenido">
       <section className="hero" id="inicio">
-        <div className="hero-graphics" aria-hidden="true"><img src="/manus-storage/paseo-limay-hero-contours_39566ba8.jpg" alt="" /><span className="hero-river-line one" /><span className="hero-river-line two" /></div>
+        <div className="hero-graphics" aria-hidden="true"><img src="/images/paseo-limay-hero-contours.jpg" alt="" /><span className="hero-river-line one" /><span className="hero-river-line two" /></div>
         <div className="hero-copy">
           <p className="eyebrow"><span className="eyebrow-dot" />{c.heroEyebrow}</p>
           <h1>{c.heroTitle}</h1>
           <p className="lede">{c.heroText}</p>
           <div className="hero-actions"><a className="button-solid" href="#visita"><Compass size={17} />{c.explore}</a><a className="button-quiet" href="#ubicacion">{c.seeMap}<span>↘</span></a></div>
         </div>
-        <figure className="hero-photo"><img src="/manus-storage/limay-river-autumn_a52f30d2.jpg" alt={language === "es" ? "Ribera arbolada del río Limay en Neuquén" : "Tree-lined bank of the Limay River in Neuquén"} /><figcaption><span>{c.photoCaption}</span><span>01</span></figcaption></figure>
+        <figure className="hero-photo"><img src="/images/limay-river-autumn.jpg" alt={language === "es" ? "Ribera arbolada del río Limay en Neuquén" : "Tree-lined bank of the Limay River in Neuquén"} /><figcaption><span>{c.photoCaption}</span><span>01</span></figcaption></figure>
         <div className="hero-facts">{c.facts.map(([big, small]) => <div key={big}><strong>{big}</strong><span>{small}</span></div>)}</div>
       </section>
 
@@ -184,14 +184,14 @@ export default function Home({ initialLanguage = "es" }: { initialLanguage?: Lan
         <div className="section-marker"><span>01</span><i>{c.atlas}</i></div>
         <div className="intro-copy"><h2 id="atlas-heading">{c.introTitle}</h2><p>{c.intro}</p><a className="source-link" href="https://www.neuquencapital.gov.ar/turismo/paseo-costero-4/" target="_blank" rel="noreferrer">{c.citation}<ExternalLink size={14} /></a></div>
         <div className="river-note"><Waves aria-hidden="true" size={28} /><p>{c.riverNote}</p><small>{c.noteBy}</small></div>
-        <figure className="river-photo"><img src="/manus-storage/paseo-limay-vertical_f64ac97c.jpg" alt={language === "es" ? "Acceso documentado al Paseo de la Costa" : "Documentary view of a Paseo de la Costa access"} /></figure>
+        <figure className="river-photo"><img src="/images/paseo-limay-vertical.jpg" alt={language === "es" ? "Acceso documentado al Paseo de la Costa" : "Documentary view of a Paseo de la Costa access"} /></figure>
       </section>
 
       <section className="practical-section" id="visita" aria-labelledby="visit-heading">
         <div className="section-heading split-heading"><div><p className="eyebrow">{c.planEyebrow}</p><h2 id="visit-heading">{c.planTitle}</h2></div><p>{c.planText}</p></div>
         <aside className="route-legend" aria-label={c.routeLegend}><ConfluenceMark /><div><strong>{c.routeLegend}</strong><span>{c.routeCondition}</span></div><i>38° 58′ S · 68° 03′ O</i></aside>
-        <div className="practical-ribbon"><img src="/manus-storage/paseo-limay-route-ribbon_eafe1f9b.jpg" alt="" /><div className="timing-card"><SunMedium size={23} /><div><h3>{c.bestTitle}</h3><p>{c.bestText}</p></div></div><div className="cost-card"><Ticket size={21} /><div><h3>{c.costTitle}</h3><p>{c.costText}</p></div></div></div>
-        <div className="amenities-area"><div className="amenities-intro"><p className="eyebrow">{c.atlas}</p><h3>{c.amenitiesTitle}</h3><img src="/manus-storage/paseo-limay-amenities-map_900f3006.jpg" alt="" /></div><div className="amenity-list">{c.amenityItems.map(([title, text], index) => { const Icon = amenityIcons[index]; return <article key={title}><span><Icon size={19} /></span><div><h4>{title}</h4><p>{text}</p></div></article>; })}</div></div>
+        <div className="practical-ribbon"><img src="/images/paseo-limay-route-ribbon.jpg" alt="" /><div className="timing-card"><SunMedium size={23} /><div><h3>{c.bestTitle}</h3><p>{c.bestText}</p></div></div><div className="cost-card"><Ticket size={21} /><div><h3>{c.costTitle}</h3><p>{c.costText}</p></div></div></div>
+        <div className="amenities-area"><div className="amenities-intro"><p className="eyebrow">{c.atlas}</p><h3>{c.amenitiesTitle}</h3><img src="/images/paseo-limay-amenities-map.jpg" alt="" /></div><div className="amenity-list">{c.amenityItems.map(([title, text], index) => { const Icon = amenityIcons[index]; return <article key={title}><span><Icon size={19} /></span><div><h4>{title}</h4><p>{text}</p></div></article>; })}</div></div>
       </section>
 
       <section className="mobility-section section-flow" aria-labelledby="mobility-heading">
@@ -211,7 +211,7 @@ export default function Home({ initialLanguage = "es" }: { initialLanguage?: Lan
       </section>
 
       <section className="story-section" aria-labelledby="story-heading">
-        <figure><img src="/manus-storage/limay-path-sunset_aebb7ad5.jpg" alt={language === "es" ? "Atardecer en la costa del río Limay" : "Sunset on the Limay River bank"} /><figcaption>{c.photoCaption}</figcaption></figure>
+        <figure><img src="/images/limay-path-sunset.jpg" alt={language === "es" ? "Atardecer en la costa del río Limay" : "Sunset on the Limay River bank"} /><figcaption>{c.photoCaption}</figcaption></figure>
         <div className="story-copy"><p className="eyebrow">{c.historyEyebrow}</p><h2 id="story-heading">{c.historyTitle}</h2><p>{c.history}</p><blockquote>{c.storyQuote}</blockquote></div>
         <div className="care-card"><Wind size={24} /><h3>{c.careTitle}</h3><ul>{c.care.map((item) => <li key={item}>{item}</li>)}</ul></div>
       </section>
