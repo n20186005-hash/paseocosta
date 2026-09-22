@@ -40,6 +40,8 @@ export const attraction = {
   govtTourismUrl: "https://www.neuquencapital.gov.ar/turismo/paseo-costero-4/",
   /** Province tourism portal. */
   provinceTourismUrl: "https://www.neuquen.gob.ar",
+  /** National tourism portal (E-E-A-T + entity association). */
+  argentinaTourismUrl: "https://www.argentina.travel",
 } as const;
 
 /** Absolute URL helpers built from the production domain. */

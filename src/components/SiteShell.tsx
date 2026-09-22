@@ -3,6 +3,7 @@
  * real photography, asymmetric river-like flow, and calm factual wayfinding.
  */
 import { Globe2 } from "lucide-react";
+import { attraction } from "../data/site";
 
 export type Language = "es" | "en";
 
@@ -37,6 +38,7 @@ type ShellCopy = {
   services: string;
   seasons: string;
   routes: string;
+  sourceLinks: { label: string; href: string }[];
 };
 
 const copy: Record<Language, ShellCopy> = {
@@ -58,6 +60,11 @@ const copy: Record<Language, ShellCopy> = {
       "Esta guía independiente y sin fines de lucro no está afiliada a organismos gubernamentales ni a la administración oficial del atractivo.",
     references:
       "Información contrastada con fuentes públicas de la Municipalidad de Neuquén, Turismo Provincia del Neuquén y Turismo de Argentina. No contiene recomendaciones comerciales.",
+    sourceLinks: [
+      { label: "Municipalidad de Neuquén", href: attraction.govtTourismUrl },
+      { label: "Turismo Provincia del Neuquén", href: attraction.provinceTourismUrl },
+      { label: "Turismo de Argentina", href: attraction.argentinaTourismUrl },
+    ],
     copyright: "© 2026 Paseo de la Costa Guía. Todos los derechos reservados.",
     transport: "Cómo llegar",
     services: "Servicios",
@@ -82,6 +89,11 @@ const copy: Record<Language, ShellCopy> = {
       "This independent, nonprofit guide is not affiliated with any government body or the attraction's official administration.",
     references:
       "Information is cross-checked against public materials from the Municipality of Neuquén, Neuquén Province Tourism and Argentina Tourism. It contains no commercial recommendations.",
+    sourceLinks: [
+      { label: "Municipality of Neuquén", href: attraction.govtTourismUrl },
+      { label: "Neuquén Province Tourism", href: attraction.provinceTourismUrl },
+      { label: "Argentina Tourism", href: attraction.argentinaTourismUrl },
+    ],
     copyright: "© 2026 Paseo de la Costa Guide. All rights reserved.",
     transport: "Getting there",
     services: "Services",
@@ -153,6 +165,11 @@ export function SiteFooter({ language }: { language: Language }) {
         <div className="footer-note">
           <p className="eyebrow">{c.sources}</p>
           <p>{c.references}</p>
+          <div className="source-links">
+            {c.sourceLinks.map((l) => (
+              <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer">{l.label}</a>
+            ))}
+          </div>
         </div>
       </div>
       <div className="footer-bottom"><span>{c.copyright}</span><span>{language === "es" ? "Neuquén, Argentina" : "Neuquén, Argentina"}</span></div>

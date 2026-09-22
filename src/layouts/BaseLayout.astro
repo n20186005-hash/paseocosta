@@ -6,7 +6,7 @@ const { title, description, path, lang = "es-AR" } = Astro.props;
 ---
 <!doctype html>
 <html lang={lang}>
-  <head><BaseHead title={title} description={description} path={path} /></head>
+  <head><BaseHead title={title} description={description} path={path} lang={lang === "en" ? "en" : "es"} /></head>
   <body>
     <slot />
     <script is:inline>

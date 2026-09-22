@@ -38,7 +38,12 @@ export function buildAttractionSchema(lang: Language) {
       longitude: attraction.lon,
     },
     hasMap: attraction.mapsShareUrl,
-    sameAs: [attraction.mapsShareUrl, attraction.govtTourismUrl, attraction.provinceTourismUrl],
+    sameAs: [
+      attraction.mapsShareUrl,
+      attraction.govtTourismUrl,
+      attraction.provinceTourismUrl,
+      attraction.argentinaTourismUrl,
+    ],
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: attraction.ratingValue,
@@ -79,11 +84,11 @@ export function seoTitle(lang: Language): string {
     : `${attraction.fullName} ${attraction.city} — Visitor Guide`;
 }
 
-/** Localized meta description. */
+/** Localized meta description, tuned for SERP click-through (GSC: 0% CTR). */
 export function seoDescription(lang: Language): string {
   return lang === "es"
-    ? `Descubrí ${attraction.fullName}, el paseo ribereño de ${attraction.city}, ${attraction.provinceEs}, ${attraction.country}. Mapa de ubicación, accesos, servicios y consejos de recorrido.`
-    : `Discover ${attraction.fullName}, the riverfront promenade in ${attraction.city}, ${attraction.province}, ${attraction.country}. View the location map, access options, services and travel tips.`;
+    ? `Guía de visita gratuita al ${attraction.fullName} en ${attraction.city}, junto al Río Limay. Cómo llegar, estacionamiento, servicios, clima en vivo y rutas para recorrer la costanera.`
+    : `Free visitor guide to ${attraction.fullName} in ${attraction.city}, by the Río Limay. How to get there, parking, services, live weather and walking routes for the waterfront.`;
 }
 
 export { site };
