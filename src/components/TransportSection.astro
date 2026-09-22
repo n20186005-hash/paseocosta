@@ -1,0 +1,60 @@
+---
+import type { Language } from "./SiteShell";
+
+interface Props {
+  lang: Language;
+}
+const { lang } = Astro.props;
+
+const T = lang === "es"
+  ? {
+      marker: "Cómo llegar",
+      eyebrow: "Guía de acceso en detalle",
+      title: "Llegar a la ribera, paso a paso",
+      intro:
+        "El Paseo de la Costa es extenso y se recorre por tramos. Elegí el acceso según el punto que quieras caminar y corroborá el día de la visita las condiciones vigentes.",
+      items: [
+        ["✈️", "Desde el aeropuerto", "El Aeropuerto Internacional Presidente Perón (NQN) queda al suroeste del centro, a unos 15 km. En taxi o remis el trayecto suele tardar 20–35 min; también podés alquilar vehículo y tomar la RN22 / Acceso Norte hacia la ciudad."],
+        ["🚌", "Desde la terminal de ómnibus", "La Estación Terminal de Ómnibus está en el centro. En taxi o remis llegás al paseo en unos 10 min; varias líneas urbanas pasan a pocas cuadras."],
+        ["🚏", "Transporte urbano (colectivos)", "La red de colectivos urbanos conecta el centro con distintos accesos. Líneas y frecuencias cambian: consultá el planificador oficial el mismo día y bajá en un acceso señalizado y seguro."],
+        ["🚖", "Taxi y remis", "Hay servicios en el aeropuerto, la terminal y las calles céntricas. Preferí los habilitados, consultá la tarifa estimada antes de subir y considerá aplicaciones de viaje según disponibilidad."],
+        ["🚗", "En auto particular", "Acercate por Av. Argentina o la costanera y seguí la señalización vial y ciclista real. En horas de mayor concurrencia manejá despacio y compartí el espacio con peatones y ciclistas."],
+        ["🚲", "En bicicleta", "Las bicisendas unen varios tramos del paseo. Llevá candado y respetá la convivencia con peatones; bajá la velocidad en zonas concurridas."],
+      ],
+      note: "Tiempos y distancias son aproximados y dependen del tránsito y el acceso elegido. Para el pronóstico del día y condiciones del río, revisá el módulo de clima.",
+    }
+  : {
+      marker: "Getting there",
+      eyebrow: "Detailed access guide",
+      title: "Reach the riverbank, step by step",
+      intro:
+        "Paseo de la Costa is long and is walked in sections. Choose your access according to the stretch you want to walk and confirm on the day the current conditions.",
+      items: [
+        ["✈️", "From the airport", "Presidente Perón International Airport (NQN) is southwest of the centre, about 15 km away. By taxi or remise the trip is usually 20–35 min; you can also rent a vehicle and take RN22 / Acceso Norte into the city."],
+        ["🚌", "From the bus terminal", "The Bus Terminal is in the centre. By taxi or remise you reach the promenade in about 10 min; several urban lines run a few blocks away."],
+        ["🚏", "Urban buses", "The urban bus network connects the centre with different access points. Lines and frequencies change: use the official trip planner on the day and alight at a signed, safe access point."],
+        ["🚖", "Taxi and remise", "Services operate at the airport, the terminal and central streets. Prefer licensed ones, ask the estimated fare before boarding and consider ride apps depending on availability."],
+        ["🚗", "By private car", "Approach via Av. Argentina or the waterfront and follow actual road and cycle signage. When busy, drive slowly and share space with walkers and cyclists."],
+        ["🚲", "By bicycle", "Cycle paths link several stretches of the promenade. Bring a lock and share space with pedestrians; slow down in crowded areas."],
+      ],
+      note: "Times and distances are approximate and depend on traffic and the chosen access. For the day's forecast and river conditions, see the weather module.",
+    };
+---
+<section class="transport-section section-flow" id="transporte" aria-labelledby="transport-heading">
+  <div class="section-marker"><span>08</span><i>{T.marker}</i></div>
+  <p class="eyebrow">{T.eyebrow}</p>
+  <h2 id="transport-heading">{T.title}</h2>
+  <p class="section-lede">{T.intro}</p>
+  <div class="info-grid">
+    {T.items.map(([emoji, title, text]) => (
+      <article class="info-card">
+        <span class="info-emoji" aria-hidden="true">{emoji}</span>
+        <h3>{title}</h3>
+        <p>{text}</p>
+      </article>
+    ))}
+  </div>
+  <aside class="info-note">
+    <p>{T.note}</p>
+  </aside>
+</section>

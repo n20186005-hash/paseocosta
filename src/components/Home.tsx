@@ -2,15 +2,22 @@
  * Design reminder — Cartografía de ribera: real photo reportage leads;
  * geographic lines, asymmetry, and the Azul Limay signature guide every section.
  */
-import { Accessibility, BusFront, CarFront, ChevronDown, CircleParking, Compass, ExternalLink, Footprints, Fuel, MapPinned, Plane, ShieldAlert, Soup, SunMedium, Ticket, Trees, UsersRound, Waves, Wind } from "lucide-react";
+import { Accessibility, BusFront, CarFront, ChevronDown, CircleParking, Compass, ExternalLink, Footprints, Fuel, MapPinned, Plane, ShieldAlert, Soup, Star, SunMedium, Ticket, Trees, UsersRound, Waves, Wind } from "lucide-react";
 import { ConfluenceMark, SiteFooter, SiteHeader, type Language } from "./SiteShell";
+import { attraction } from "../data/site";
+import { faq } from "../data/faq";
 
 const siteCopy = {
   es: {
     skip: "Saltar al contenido",
     heroEyebrow: "Neuquén · Río Limay · Argentina",
-    heroTitle: "Donde la ciudad aprende a caminar con el río.",
+    heroTitle: "Paseo de la Costa (Neuquén)",
+    heroSubtitle: "Donde la ciudad aprende a caminar con el río.",
     heroText: "Una guía independiente para descubrir Paseo de la Costa: una ribera pública de baja dificultad donde el paisaje, el movimiento y la pausa se encuentran.",
+    rating: { value: "4.6", count: "28.845", source: "Google Maps" },
+    breadcrumb: "Paseo de la Costa · Neuquén · Provincia de Neuquén · Argentina",
+    entityIntro: "Paseo de la Costa, también conocido como Paseo Costero Río Limay, es el paseo ribereño principal de Neuquén. Se extiende junto al río Limay, en el corazón de la ciudad, y funciona como punto de partida para quienes recorren la región.",
+    phoneLabel: "Teléfono de contacto",
     explore: "Empezá el recorrido",
     seeMap: "Ver ubicación",
     photoCaption: "Ribera del río Limay · Paseo Costero",
@@ -83,8 +90,13 @@ const siteCopy = {
   en: {
     skip: "Skip to content",
     heroEyebrow: "Neuquén · Limay River · Argentina",
-    heroTitle: "Where the city learns to walk with the river.",
+    heroTitle: "Paseo de la Costa (Neuquén)",
+    heroSubtitle: "Where the city learns to walk with the river.",
     heroText: "An independent guide to Paseo de la Costa: a low-difficulty public riverfront where landscape, movement and pause meet.",
+    rating: { value: "4.6", count: "28,845", source: "Google Maps" },
+    breadcrumb: "Paseo de la Costa · Neuquén · Neuquén Province · Argentina",
+    entityIntro: "Paseo de la Costa, also known as Paseo Costero Río Limay, is the main riverfront promenade of Neuquén. It runs along the Limay River in the heart of the city and serves as a starting point for visitors exploring the region.",
+    phoneLabel: "Contact phone",
     explore: "Start the walk",
     seeMap: "View location",
     photoCaption: "Limay River bank · Paseo Costero",
@@ -173,18 +185,25 @@ export default function Home({ initialLanguage = "es" }: { initialLanguage?: Lan
         <div className="hero-copy">
           <p className="eyebrow"><span className="eyebrow-dot" />{c.heroEyebrow}</p>
           <h1>{c.heroTitle}</h1>
+          <p className="hero-sub">{c.heroSubtitle}</p>
           <p className="lede">{c.heroText}</p>
+          <p className="hero-rating"><Star size={15} aria-hidden="true" />{c.rating.value}<span>({c.rating.count})</span><small>{c.rating.source}</small></p>
           <div className="hero-actions"><a className="button-solid" href="#visita"><Compass size={17} />{c.explore}</a><a className="button-quiet" href="#ubicacion">{c.seeMap}<span>↘</span></a></div>
         </div>
-        <figure className="hero-photo"><img src="/images/limay-river-autumn.jpg" alt={language === "es" ? "Ribera arbolada del río Limay en Neuquén" : "Tree-lined bank of the Limay River in Neuquén"} /><figcaption><span>{c.photoCaption}</span><span>01</span></figcaption></figure>
+        <figure className="hero-photo"><img src="/images/limay-river-autumn.jpg" alt={language === "es" ? "Paseo de la Costa junto al río Limay en Neuquén, Argentina" : "Paseo de la Costa along the Limay River in Neuquén, Argentina"} loading="eager" /><figcaption><span>{c.photoCaption}</span><span>01</span></figcaption></figure>
         <div className="hero-facts">{c.facts.map(([big, small]) => <div key={big}><strong>{big}</strong><span>{small}</span></div>)}</div>
       </section>
 
       <section className="intro-section section-flow" aria-labelledby="atlas-heading">
         <div className="section-marker"><span>01</span><i>{c.atlas}</i></div>
-        <div className="intro-copy"><h2 id="atlas-heading">{c.introTitle}</h2><p>{c.intro}</p><a className="source-link" href="https://www.neuquencapital.gov.ar/turismo/paseo-costero-4/" target="_blank" rel="noreferrer">{c.citation}<ExternalLink size={14} /></a></div>
+        <div className="intro-copy">
+          <p className="entity-breadcrumb" aria-label={language === "es" ? "Ubicación" : "Location"}>{c.breadcrumb}</p>
+          <h2 id="atlas-heading">{c.introTitle}</h2><p>{c.intro}</p>
+          <p className="entity-declaration">{c.entityIntro}</p>
+          <a className="source-link" href="https://www.neuquencapital.gov.ar/turismo/paseo-costero-4/" target="_blank" rel="noreferrer">{c.citation}<ExternalLink size={14} /></a>
+        </div>
         <div className="river-note"><Waves aria-hidden="true" size={28} /><p>{c.riverNote}</p><small>{c.noteBy}</small></div>
-        <figure className="river-photo"><img src="/images/paseo-limay-vertical.jpg" alt={language === "es" ? "Acceso documentado al Paseo de la Costa" : "Documentary view of a Paseo de la Costa access"} /></figure>
+        <figure className="river-photo"><img src="/images/paseo-limay-vertical.jpg" alt={language === "es" ? "Paseo de la Costa (Neuquén): acceso a la ribera del río Limay" : "Paseo de la Costa (Neuquén): access to the Limay River bank"} /></figure>
       </section>
 
       <section className="practical-section" id="visita" aria-labelledby="visit-heading">
@@ -201,7 +220,7 @@ export default function Home({ initialLanguage = "es" }: { initialLanguage?: Lan
       </section>
 
       <section className="map-section" id="ubicacion" aria-labelledby="map-heading">
-        <div className="map-copy"><p className="eyebrow">{c.mapEyebrow}</p><h2 id="map-heading">{c.mapTitle}</h2><p>{c.mapText}</p><a className="button-solid" href="https://maps.app.goo.gl/rVB9GRmjSuwGKSyJ8" target="_blank" rel="noreferrer"><MapPinned size={17} />{c.routeCta}</a><p className="map-coords">38° 58′ 45″ S · 68° 03′ 22″ O</p></div>
+        <div className="map-copy"><p className="eyebrow">{c.mapEyebrow}</p><h2 id="map-heading">{c.mapTitle}</h2><p>{c.mapText}</p><a className="button-solid" href="https://maps.app.goo.gl/rVB9GRmjSuwGKSyJ8" target="_blank" rel="noreferrer"><MapPinned size={17} />{c.routeCta}</a><p className="map-coords">38° 58′ 45″ S · 68° 03′ 22″ O</p><p className="map-phone">{c.phoneLabel}: <a href={`tel:${attraction.phone.replace(/\s+/g, "")}`}>{attraction.phone}</a></p></div>
         <div className="map-frame"><iframe title="Paseo de la Costa en Neuquén" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5516.618733068807!2d-68.05618952252352!3d-38.97917527170686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x960a32203113e6c7%3A0x1ec9e5b4b83d4aa7!2sPaseo%20de%20la%20Costa!5e1!3m2!1ses-419!2sar!4v1787793759333!5m2!1ses-419!2sar" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen /></div>
       </section>
 
@@ -211,17 +230,17 @@ export default function Home({ initialLanguage = "es" }: { initialLanguage?: Lan
       </section>
 
       <section className="story-section" aria-labelledby="story-heading">
-        <figure><img src="/images/limay-path-sunset.jpg" alt={language === "es" ? "Atardecer en la costa del río Limay" : "Sunset on the Limay River bank"} /><figcaption>{c.photoCaption}</figcaption></figure>
+        <figure><img src="/images/limay-path-sunset.jpg" alt={language === "es" ? "Atardecer en Paseo de la Costa, ribera del río Limay, Neuquén" : "Sunset at Paseo de la Costa, Limay River bank, Neuquén"} /><figcaption>{c.photoCaption}</figcaption></figure>
         <div className="story-copy"><p className="eyebrow">{c.historyEyebrow}</p><h2 id="story-heading">{c.historyTitle}</h2><p>{c.history}</p><blockquote>{c.storyQuote}</blockquote></div>
         <div className="care-card"><Wind size={24} /><h3>{c.careTitle}</h3><ul>{c.care.map((item) => <li key={item}>{item}</li>)}</ul></div>
       </section>
 
       <section className="faq-section" id="preguntas" aria-labelledby="faq-heading">
         <div className="faq-intro"><p className="eyebrow">{c.faqEyebrow}</p><h2 id="faq-heading">{c.faqTitle}</h2><div className="faq-stamp"><Trees size={21} /><span>Paseo de la Costa<br />Neuquén</span></div></div>
-        <div className="faq-list">{c.faq.map(([question, answer], index) => <details key={question} open={index === 0}><summary><span>{String(index + 1).padStart(2, "0")}</span><strong>{question}</strong><ChevronDown size={20} /></summary><div className="faq-answer"><p>{answer}</p></div></details>)}</div>
+        <div className="faq-list">{faq[language].map(([question, answer], index) => <details key={question} open={index === 0}><summary><span>{String(index + 1).padStart(2, "0")}</span><strong>{question}</strong><ChevronDown size={20} /></summary><div className="faq-answer"><p>{answer}</p></div></details>)}</div>
       </section>
 
-      <section className="sources-section"><div><ShieldAlert size={23} /><p className="eyebrow">{c.sourceLabel}</p><p>{c.sourceText}</p></div><div className="source-links"><a href="https://www.neuquencapital.gov.ar/turismo/paseo-costero-4/" target="_blank" rel="noreferrer">Municipalidad de Neuquén · Turismo <ExternalLink size={14} /></a><a href="https://www.neuquencapital.gov.ar/prensa/la-municipalidad-incorporo-banos-publicos-al-paseo-costero-rio-limay-en-el-sector-del-barrio-confluencia/" target="_blank" rel="noreferrer">Municipalidad de Neuquén · Prensa <ExternalLink size={14} /></a></div></section>
+      <section className="sources-section"><div><ShieldAlert size={23} /><p className="eyebrow">{c.sourceLabel}</p><p>{c.sourceText}</p></div><div className="source-links"><a href={attraction.govtTourismUrl} target="_blank" rel="noreferrer">Municipalidad de Neuquén · Turismo <ExternalLink size={14} /></a><a href="https://www.neuquencapital.gov.ar/prensa/la-municipalidad-incorporo-banos-publicos-al-paseo-costero-rio-limay-en-el-sector-del-barrio-confluencia/" target="_blank" rel="noreferrer">Municipalidad de Neuquén · Prensa <ExternalLink size={14} /></a><a href={attraction.provinceTourismUrl} target="_blank" rel="noreferrer">Turismo Provincia del Neuquén <ExternalLink size={14} /></a><a href="https://www.argentina.gob.ar" target="_blank" rel="noreferrer">Turismo Argentina <ExternalLink size={14} /></a></div></section>
     </main>
     <SiteFooter language={language} />
   </div>;

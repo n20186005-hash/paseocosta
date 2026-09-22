@@ -1,0 +1,154 @@
+---
+import { fetchWeather, buildAdvice, wmoInfo, beaufort, windWord } from "../lib/weather";
+import { attraction } from "../data/site";
+import type { Language } from "./SiteShell";
+
+interface Props {
+  lang: Language;
+}
+const { lang } = Astro.props;
+const TZ = "America/Argentina/Buenos_Aires";
+
+const data = await fetchWeather(attraction.lat, attraction.lon);
+const copy = lang === "es"
+  ? {
+      eyebrow: "Clima en vivo",
+      marker: "Clima",
+      title: `Clima en ${attraction.fullName}, ${attraction.city}`,
+      updated: "Actualizado al momento",
+      now: "Ahora",
+      feels: "Sensación",
+      rain: "Lluvia",
+      wind: "Viento",
+      humidity: "Humedad",
+      tabs: { outfit: "Cómo vestirse", activity: "Cómo recorrer", gear: "Qué llevar" },
+      alert: "Aviso",
+      forecast: "Próximos 7 días",
+      error: "El pronóstico no está disponible en este momento. Volvé a consultar más tarde.",
+      weekday: "es-AR",
+    }
+  : {
+      eyebrow: "Live weather",
+      marker: "Weather",
+      title: `Weather at ${attraction.fullName}, ${attraction.city}`,
+      updated: "Updated just now",
+      now: "Now",
+      feels: "Feels like",
+      rain: "Rain",
+      wind: "Wind",
+      humidity: "Humidity",
+      tabs: { outfit: "What to wear", activity: "What to do", gear: "What to bring" },
+      alert: "Alert",
+      forecast: "Next 7 days",
+      error: "The forecast is unavailable right now. Check back later.",
+      weekday: "en-US",
+    };
+
+let advice: ReturnType<typeof buildAdvice> | null = null;
+let days: { label: string; emoji: string; tMax: number; tMin: number; pop: number }[] = [];
+let cur: { emoji: string; label: string; temp: number; pop: number; kmh: number; word: string; humidity: number } | null = null;
+
+if (data) {
+  advice = buildAdvice(data, lang);
+  const fmt = new Intl.DateTimeFormat(copy.weekday, { weekday: "short", timeZone: TZ });
+  days = data.days.map((d) => {
+    const info = wmoInfo(d.code, lang);
+    return { label: fmt.format(new Date(`${d.date}T12:00:00`)), emoji: info.emoji, tMax: d.tMax, tMin: d.tMin, pop: d.precipProb };
+  });
+  const ci = wmoInfo(data.current.code, lang);
+  cur = {
+    emoji: ci.emoji,
+    label: ci.label,
+    temp: data.current.temperature,
+    pop: data.today.precipProb,
+    kmh: Math.round(data.current.windMs * 3.6),
+    word: windWord(beaufort(data.current.windMs), lang),
+    humidity: data.current.humidity,
+  };
+}
+const hasGear = !!advice && advice.gear.length > 0;
+---
+
+<section class="weather-section section-flow" aria-labelledby="weather-heading">
+  <div class="section-marker"><span>06</span><i>{copy.marker}</i></div>
+  <p class="eyebrow">{copy.eyebrow}</p>
+  <h2 id="weather-heading">{copy.title}</h2>
+
+  {
+    data && cur && advice ? (
+      <>
+        <div class="wx-current">
+          <div class="wx-now">
+            <span class="wx-emoji" aria-hidden="true">{cur.emoji}</span>
+            <div>
+              <p class="wx-temp">{cur.temp}<span>°C</span></p>
+              <p class="wx-cond">{cur.label}</p>
+            </div>
+          </div>
+          <ul class="wx-stats">
+            <li><span>{copy.rain}</span><strong>{cur.pop}%</strong></li>
+            <li><span>{copy.wind}</span><strong>{cur.word} · {cur.kmh} km/h</strong></li>
+            <li><span>{copy.humidity}</span><strong>{cur.humidity}%</strong></li>
+          </ul>
+        </div>
+
+        {advice.risks.length > 0 && (
+          <div class="wx-risk" role="alert">
+            <span class="wx-risk-tag">{copy.alert}</span>
+            <ul>
+              {advice.risks.map((r) => (
+                <li class={r.danger ? "wx-danger" : "wx-warn"}>{r.text}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        <div class="wx-tabs">
+          <input class="wx-r wx-r-outfit" type="radio" name={`wxtab-${lang}`} id={`wx-outfit-${lang}`} checked />
+          <input class="wx-r wx-r-activity" type="radio" name={`wxtab-${lang}`} id={`wx-activity-${lang}`} />
+          {hasGear && <input class="wx-r wx-r-gear" type="radio" name={`wxtab-${lang}`} id={`wx-gear-${lang}`} />}
+
+          <label class="wx-tab wx-tab-outfit" for={`wx-outfit-${lang}`}>{copy.tabs.outfit}</label>
+          <label class="wx-tab wx-tab-activity" for={`wx-activity-${lang}`}>{copy.tabs.activity}</label>
+          {hasGear && <label class="wx-tab wx-tab-gear" for={`wx-gear-${lang}`}>{copy.tabs.gear}</label>}
+
+          <div class="wx-panels">
+            <div class="wx-panel wx-outfit">
+              <ul class="wx-list">
+                {advice.outfit.map((s) => <li><span class="wx-ok">✓</span>{s}</li>)}
+              </ul>
+            </div>
+            <div class="wx-panel wx-activity">
+              <ul class="wx-list">
+                {advice.activity.map((s) => <li><span class="wx-ok">✓</span>{s}</li>)}
+              </ul>
+            </div>
+            {hasGear && (
+              <div class="wx-panel wx-gear">
+                <ul class="wx-list">
+                  {advice.gear.map((s) => <li><span class="wx-bag">🎒</span>{s}</li>)}
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div class="wx-forecast">
+          <p class="wx-forecast-title">{copy.forecast}</p>
+          <ul class="wx-days">
+            {days.map((d, i) => (
+              <li class={i === 0 ? "wx-day wx-day-today" : "wx-day"}>
+                <span class="wx-dow">{i === 0 ? (lang === "es" ? "Hoy" : "Today") : d.label}</span>
+                <span class="wx-demoji" aria-hidden="true">{d.emoji}</span>
+                <span class="wx-dtemp">{d.tMax}° / {d.tMin}°</span>
+                <span class="wx-dpop">{d.pop}%</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </>
+    ) : (
+      <p class="wx-error">{copy.error}</p>
+    )
+  }
+</section>

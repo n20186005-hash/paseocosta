@@ -1,7 +1,26 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Home from "../../components/Home";
+import WeatherSection from "../../components/WeatherSection.astro";
+import ServicesSection from "../../components/ServicesSection.astro";
+import TransportSection from "../../components/TransportSection.astro";
+import SeasonalSection from "../../components/SeasonalSection.astro";
+import RoutesSection from "../../components/RoutesSection.astro";
+import ScienceSection from "../../components/ScienceSection.astro";
+import { buildAttractionSchema, buildFaqSchema, seoTitle, seoDescription } from "../../lib/schema";
+
+const lang = "en";
+const attractionSchema = buildAttractionSchema(lang);
+const faqSchema = buildFaqSchema(lang);
 ---
-<BaseLayout title="Paseo de la Costa · Neuquén Guide" description="An independent, bilingual guide to Paseo de la Costa in Neuquén, Argentina." path="/en/" lang="en">
+<BaseLayout title={seoTitle(lang)} description={seoDescription(lang)} path="/en/" lang="en">
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(attractionSchema)} />
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
   <Home initialLanguage="en" />
+  <WeatherSection lang="en" />
+  <ServicesSection lang="en" />
+  <TransportSection lang="en" />
+  <SeasonalSection lang="en" />
+  <RoutesSection lang="en" />
+  <ScienceSection lang="en" />
 </BaseLayout>

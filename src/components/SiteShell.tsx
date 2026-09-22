@@ -33,6 +33,10 @@ type ShellCopy = {
   disclaimer: string;
   references: string;
   copyright: string;
+  transport: string;
+  services: string;
+  seasons: string;
+  routes: string;
 };
 
 const copy: Record<Language, ShellCopy> = {
@@ -55,6 +59,10 @@ const copy: Record<Language, ShellCopy> = {
     references:
       "Información contrastada con fuentes públicas de la Municipalidad de Neuquén, Turismo Provincia del Neuquén y Turismo de Argentina. No contiene recomendaciones comerciales.",
     copyright: "© 2026 Paseo de la Costa Guía. Todos los derechos reservados.",
+    transport: "Cómo llegar",
+    services: "Servicios",
+    seasons: "Por estación",
+    routes: "Rutas",
   },
   en: {
     home: "Home",
@@ -75,6 +83,10 @@ const copy: Record<Language, ShellCopy> = {
     references:
       "Information is cross-checked against public materials from the Municipality of Neuquén, Neuquén Province Tourism and Argentina Tourism. It contains no commercial recommendations.",
     copyright: "© 2026 Paseo de la Costa Guide. All rights reserved.",
+    transport: "Getting there",
+    services: "Services",
+    seasons: "By season",
+    routes: "Routes",
   },
 };
 
@@ -98,6 +110,10 @@ export function SiteHeader({ language, compact = false }: { language: Language; 
     : [
         { label: c.home, href: "#inicio" },
         { label: c.practical, href: "#visita" },
+        { label: c.transport, href: "#transporte" },
+        { label: c.services, href: "#servicios" },
+        { label: c.seasons, href: "#estaciones" },
+        { label: c.routes, href: "#rutas" },
         { label: c.map, href: "#ubicacion" },
         { label: c.faq, href: "#preguntas" },
       ];

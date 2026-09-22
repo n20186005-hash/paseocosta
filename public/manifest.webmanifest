@@ -1,0 +1,16 @@
+{
+  "name": "Paseo de la Costa Neuquén — Guía de visita",
+  "short_name": "Paseo Costa",
+  "description": "Guía independiente y bilingüe para recorrer Paseo de la Costa, en Neuquén, Argentina.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f6f2e9",
+  "theme_color": "#075b73",
+  "lang": "es-AR",
+  "categories": ["travel", "education"],
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

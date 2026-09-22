@@ -1,0 +1,78 @@
+---
+import type { Language } from "./SiteShell";
+
+interface Props {
+  lang: Language;
+}
+const { lang } = Astro.props;
+
+const T = lang === "es"
+  ? {
+      marker: "Rutas",
+      eyebrow: "Según quién viene y cuánto tiempo",
+      title: "Recorridos sugeridos",
+      intro: "Elegí según tu grupo y tu ritmo. Todas las opciones son de baja dificultad y comparten la misma ribera.",
+      profilesTitle: "Por perfil de visitante",
+      profiles: [
+        ["👨‍👩‍👧", "Familias con niños", "Tramos planos cerca de miradores y baños señalados. Media jornada: cochecito en sectores pavimentados, pausas en la costa y merienda al aire libre."],
+        ["📷", "Fotografía y naturaleza", "Confluencia y miradores al amanecer o atardecer, cuando la luz es lateral. Llevá trípode y respetá los sectores habilitados para no dañar la orilla."],
+        ["🧓", "Baja movilidad / accesible", "Accesos centrales pavimentados con bancos y descansos. Bucles cortos, evitando senderos de tierra; planificá el baño más cercano."],
+      ],
+      generalTitle: "Rutas generales",
+      general: [
+        ["🕒", "Media jornada · 2–3 h", "Un tramo a tu elección + un mirador + una pausa en la costa. Ideal para una primera visita o un descanso entre otras actividades de la ciudad."],
+        ["🗓️", "Jornada completa · 4–5 h", "Varios tramos conectados + Isla 132 + la Confluencia de los ríos + picnic en zona habilitada. Llevá agua, protector solar y una capa extra."],
+      ],
+      tip: "No hay una ruta única: el paseo se arma por tramos. Dejá margen para detenerte y verificá en el día los servicios que necesitás.",
+    }
+  : {
+      marker: "Routes",
+      eyebrow: "Depending on who comes and how long",
+      title: "Suggested itineraries",
+      intro: "Choose by group and pace. All options are low difficulty and share the same riverbank.",
+      profilesTitle: "By visitor profile",
+      profiles: [
+        ["👨‍👩‍👧", "Families with children", "Flat stretches near viewpoints and signed restrooms. Half day: stroller on paved sections, pauses on the bank and an outdoor snack."],
+        ["📷", "Photography and nature", "Confluence and viewpoints at sunrise or sunset, when light is side-on. Bring a tripod and respect authorised areas to avoid damaging the bank."],
+        ["🧓", "Low mobility / accessible", "Paved central accesses with benches and rest points. Short loops, avoiding dirt paths; plan the nearest restroom."],
+      ],
+      generalTitle: "General routes",
+      general: [
+        ["🕒", "Half day · 2–3 h", "One stretch of your choice + a viewpoint + a pause on the bank. Ideal for a first visit or a break between other city activities."],
+        ["🗓️", "Full day · 4–5 h", "Several connected stretches + Isla 132 + the river Confluence + a picnic in a permitted area. Bring water, sun protection and an extra layer."],
+      ],
+      tip: "There is no single route: the promenade is built in sections. Allow time to pause and check the services you need on the day.",
+    };
+---
+<section class="routes-section section-flow" id="rutas" aria-labelledby="routes-heading">
+  <div class="section-marker"><span>10</span><i>{T.marker}</i></div>
+  <p class="eyebrow">{T.eyebrow}</p>
+  <h2 id="routes-heading">{T.title}</h2>
+  <p class="section-lede">{T.intro}</p>
+
+  <h3 class="block-title">{T.profilesTitle}</h3>
+  <div class="info-grid">
+    {T.profiles.map(([emoji, title, text]) => (
+      <article class="info-card">
+        <span class="info-emoji" aria-hidden="true">{emoji}</span>
+        <h4>{title}</h4>
+        <p>{text}</p>
+      </article>
+    ))}
+  </div>
+
+  <h3 class="block-title">{T.generalTitle}</h3>
+  <div class="info-grid">
+    {T.general.map(([emoji, title, text]) => (
+      <article class="info-card">
+        <span class="info-emoji" aria-hidden="true">{emoji}</span>
+        <h4>{title}</h4>
+        <p>{text}</p>
+      </article>
+    ))}
+  </div>
+
+  <aside class="info-note">
+    <p>{T.tip}</p>
+  </aside>
+</section>

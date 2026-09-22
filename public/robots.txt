@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://paseocosta.com/sitemap-index.xml

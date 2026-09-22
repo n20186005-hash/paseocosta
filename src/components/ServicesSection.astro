@@ -1,0 +1,67 @@
+---
+import type { Language } from "./SiteShell";
+
+interface Props {
+  lang: Language;
+}
+const { lang } = Astro.props;
+
+const T = lang === "es"
+  ? {
+      marker: "Servicios",
+      eyebrow: "En el paseo y alrededores",
+      title: "Qué encontrar para organizar la visita",
+      intro:
+        "El paseo es un espacio público al aire libre: los servicios puntuales dependen del tramo y la temporada. Esta guía describe tipos de servicios y consejos para ubicarlos; no recomienda comercios específicos.",
+      items: [
+        ["🚻", "Sanitarios", "Baños públicos señalizados en sectores del Paseo Costero Río Limay, por ejemplo cerca de Club Unipol y la zona de Confluencia. La disponibilidad y el horario varían: ubicá el más cercano a tu acceso antes de empezar."],
+        ["🅿️", "Estacionamiento", "Hay sectores de estacionamiento y paradas en varios accesos urbanos. Respetá la señalización, no ocuces ciclovías ni pasos peatonales y, en temporada alta, llegá con margen porque la capacidad es limitada."],
+        ["🍴", "Comida y bebida", "Cerca de los accesos urbanos suelen haber kioscos, cafeterías y locales de comida. Llevá tu propia agua, sobre todo en verano; esta guía no recomienda comercios concretos."],
+        ["🛏️", "Alojamiento", "Neuquén ofrece hoteles, apart hoteles, hostels y cabañas en el centro y alrededores, a corta distancia en auto o taxi del paseo. Confirmá disponibilidad y tarifa con cada establecimiento."],
+        ["🛒", "Compras y farmacia", "Supermercados, farmacias y comercios varios se concentran en el área urbana cercana. Si necesitás provisiones o artículos de primera necesidad, resolvélos antes o después del recorrido."],
+        ["⛽", "Combustible y carga", "Estaciones de servicio y puntos de carga eléctrica están en la ciudad. Si venís en vehículo, organizá combustible o carga antes de llegar; no esperes encontrarlos dentro del paseo."],
+        ["♿", "Accesibilidad", "Los senderos principales son de baja dificultad, con rampas y descansos en varios tramos. Pendientes, superficies y baños accesibles varían: planeá según tus necesidades y consultá la señalización."],
+      ],
+      nearbyTitle: "En los alrededores",
+      nearby:
+        "A corta distancia del paseo están el centro de Neuquén, la Estación Terminal de Ómnibus, el aeropuerto, centros de salud, farmacias y comercios. Para cualquier necesidad de salud o seguridad, la red urbana de la ciudad queda a pocos minutos en auto o taxi.",
+    }
+  : {
+      marker: "Services",
+      eyebrow: "At the promenade and nearby",
+      title: "What to expect when planning your visit",
+      intro:
+        "The promenade is an open-air public space: specific services depend on the section and the season. This guide describes types of services and tips to find them; it does not recommend specific businesses.",
+      items: [
+        ["🚻", "Restrooms", "Signed public restrooms exist in sections of Paseo Costero Río Limay, for example near Club Unipol and the Confluence area. Availability and hours vary: locate the nearest one to your access before you start."],
+        ["🅿️", "Parking", "Parking areas and stops are found at several urban access points. Follow signage, do not block cycle lanes or pedestrian crossings and, in peak season, arrive with margin because capacity is limited."],
+        ["🍴", "Food and drink", "Kiosks, cafés and food outlets are often near the urban access points. Bring your own water, especially in summer; this guide does not endorse individual businesses."],
+        ["🛏️", "Accommodation", "Neuquén has hotels, apart-hotels, hostels and cabins in the centre and surroundings, a short drive or taxi from the promenade. Confirm availability and rates with each provider."],
+        ["🛒", "Shops and pharmacy", "Supermarkets, pharmacies and various shops cluster in the nearby urban area. If you need supplies or essentials, sort them out before or after the walk."],
+        ["⛽", "Fuel and charging", "Service stations and EV charging points are in the city. If arriving by vehicle, arrange fuel or charging beforehand; do not expect them inside the promenade."],
+        ["♿", "Accessibility", "The main paths are low difficulty, with ramps and rest points in several sections. Gradients, surfaces and accessible restrooms vary: plan around your needs and check signage."],
+      ],
+      nearbyTitle: "In the surroundings",
+      nearby:
+        "A short distance from the promenade are central Neuquén, the Bus Terminal, the airport, health centres, pharmacies and shops. For any health or safety need, the city's urban network is a few minutes away by car or taxi.",
+    };
+---
+<section class="services-section section-flow" id="servicios" aria-labelledby="services-heading">
+  <div class="section-marker"><span>07</span><i>{T.marker}</i></div>
+  <p class="eyebrow">{T.eyebrow}</p>
+  <h2 id="services-heading">{T.title}</h2>
+  <p class="section-lede">{T.intro}</p>
+  <div class="info-grid">
+    {T.items.map(([emoji, title, text]) => (
+      <article class="info-card">
+        <span class="info-emoji" aria-hidden="true">{emoji}</span>
+        <h3>{title}</h3>
+        <p>{text}</p>
+      </article>
+    ))}
+  </div>
+  <aside class="info-note">
+    <p class="eyebrow">{T.nearbyTitle}</p>
+    <p>{T.nearby}</p>
+  </aside>
+</section>

@@ -4,8 +4,9 @@ import sitemap from "@astrojs/sitemap";
 import cloudflare from "@astrojs/cloudflare";
 import tailwindcss from "@tailwindcss/vite";
 
-// Single source of truth for the production domain. Leave PUBLIC_SITE unset while the domain is pending.
-const site = process.env.PUBLIC_SITE || undefined;
+// Single source of truth for the production domain. Set explicitly so canonical,
+// OG absolute URLs and sitemap are produced; PUBLIC_SITE overrides when provided.
+const site = process.env.PUBLIC_SITE || "https://paseocosta.com";
 const useCloudflareAdapter = process.argv.includes("build");
 const storageProxy = {
   name: "manus-storage-proxy",

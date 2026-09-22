@@ -1,0 +1,76 @@
+---
+import type { Language } from "./SiteShell";
+
+interface Props {
+  lang: Language;
+}
+const { lang } = Astro.props;
+
+const T = lang === "es"
+  ? {
+      marker: "Ciencia",
+      eyebrow: "Leer el paisaje y cuidarlo",
+      title: "El río Limay y la responsabilidad de quien visita",
+      intro:
+        "Entender el río ayuda a disfrutarlo con seguridad. El Paseo de la Costa es un corredor recreativo y de movilidad sobre un curso de agua regulado y cambiante.",
+      items: [
+        ["🌊", "Un río regulado", "El Limay nace en el lago Nahuel Huapi y su caudal está regulado por el complejo hidroeléctrico Cerros Colorados. El agua es fría, clara y corre con fuerza: su estado cambia sin aviso."],
+        ["🌳", "Bosque y ribera", "Alamedas, fresnos y pastizales acompañan el recorrido. Son hábitat de aves y dan sombra; conviene respetarlos y no sacar vegetación ni alterar suelo."],
+        ["🐦", "Vida silvestre", "Gaviotas, caranchos y chimangos son frecuentes en la costa. Observalos sin perseguirlos y no los alimentes: la comida humana los desprotege."],
+        ["⚠️", "Seguridad en el agua", "El río no es una piscina: corriente, temperatura y profundidad varían. No des por seguras las condiciones de baño; seguí señalización y pautas oficiales."],
+      ],
+      responsibilityTitle: "Responsabilidad del visitante",
+      responsibility: [
+        "Llevate tus residuos: lo que traés, te lo llevás. No dejes basura en la ribera.",
+        "Mantenete en senderos y sectores habilitados; no te acerques al borde inestable del agua.",
+        "Mascotas con correa y bajo control; recogé sus desechos.",
+        "Sin fuego ni braseros: el pastizal se seca y el riesgo es real.",
+        "Respetá la señalización y los canales oficiales ante cualquier cambio de clima o servicios.",
+      ],
+      closing: "Visitante consciente: dejá solo huellas y llevate la experiencia. El paseo se cuida entre todos.",
+    }
+  : {
+      marker: "Science",
+      eyebrow: "Read the landscape and care for it",
+      title: "The Limay River and the visitor's responsibility",
+      intro:
+        "Understanding the river helps you enjoy it safely. Paseo de la Costa is a recreational and mobility corridor above a regulated, changing watercourse.",
+      items: [
+        ["🌊", "A regulated river", "The Limay rises in Lake Nahuel Huapi and its flow is regulated by the Cerros Colorados hydro complex. The water is cold, clear and runs strongly: its state changes without warning."],
+        ["🌳", "Woodland and bank", "Poplars, ash trees and grasslands line the route. They shelter birds and give shade; respect them and do not remove plants or disturb the soil."],
+        ["🐦", "Wildlife", "Gulls, caranchos and chimangos are common on the bank. Watch without chasing and do not feed them: human food puts them at risk."],
+        ["⚠️", "Water safety", "The river is not a pool: current, temperature and depth vary. Do not assume swimming is safe; follow signage and official guidance."],
+      ],
+      responsibilityTitle: "Visitor responsibility",
+      responsibility: [
+        "Take your waste with you: what you bring, you take away. Leave no litter on the bank.",
+        "Stay on paths and authorised areas; do not approach the unstable water's edge.",
+        "Pets on a leash and under control; pick up after them.",
+        "No open fires or braziers: grassland dries out and the risk is real.",
+        "Respect signage and official channels for any weather or service change.",
+      ],
+      closing: "A mindful visitor: leave only footprints and take the experience. The promenade is cared for by everyone.",
+    };
+---
+<section class="science-section section-flow" id="ciencia" aria-labelledby="science-heading">
+  <div class="section-marker"><span>11</span><i>{T.marker}</i></div>
+  <p class="eyebrow">{T.eyebrow}</p>
+  <h2 id="science-heading">{T.title}</h2>
+  <p class="section-lede">{T.intro}</p>
+  <div class="info-grid">
+    {T.items.map(([emoji, title, text]) => (
+      <article class="info-card">
+        <span class="info-emoji" aria-hidden="true">{emoji}</span>
+        <h3>{title}</h3>
+        <p>{text}</p>
+      </article>
+    ))}
+  </div>
+  <aside class="science-responsibility">
+    <h3>{T.responsibilityTitle}</h3>
+    <ul>
+      {T.responsibility.map((item) => <li>{item}</li>)}
+    </ul>
+    <p class="science-closing">{T.closing}</p>
+  </aside>
+</section>

@@ -7,5 +7,14 @@ const { title, description, path, lang = "es-AR" } = Astro.props;
 <!doctype html>
 <html lang={lang}>
   <head><BaseHead title={title} description={description} path={path} /></head>
-  <body><slot /></body>
+  <body>
+    <slot />
+    <script is:inline>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/sw.js").catch(() => {});
+        });
+      }
+    </script>
+  </body>
 </html>
