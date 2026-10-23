@@ -15,7 +15,7 @@ export function buildAttractionSchema(lang: Language) {
 
   return {
     "@context": "https://schema.org",
-    "@type": ["TouristAttraction", "LocalBusiness"],
+    "@type": "TouristAttraction",
     "@id": `${siteUrl()}/#attraction`,
     name: attraction.fullName,
     alternateName: [attraction.shortName, `${attraction.city} ${attraction.fullName}`],
@@ -23,13 +23,10 @@ export function buildAttractionSchema(lang: Language) {
     url: siteUrl(),
     image: [heroImageUrl()],
     isAccessibleForFree: true,
-    telephone: attraction.phone,
     address: {
       "@type": "PostalAddress",
-      streetAddress: attraction.fullName,
       addressLocality: attraction.city,
       addressRegion: attraction.provinceEs,
-      postalCode: attraction.postalCode,
       addressCountry: attraction.countryCode,
     },
     geo: {
@@ -41,26 +38,8 @@ export function buildAttractionSchema(lang: Language) {
     sameAs: [
       attraction.mapsShareUrl,
       attraction.govtTourismUrl,
-      attraction.provinceTourismUrl,
-      attraction.argentinaTourismUrl,
     ],
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: attraction.ratingValue,
-      reviewCount: attraction.ratingCount,
-      bestRating: 5,
-      worstRating: 1,
-    },
-    openingHoursSpecification: {
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-      opens: "00:00",
-      closes: "23:59",
-      description:
-        lang === "es"
-          ? "Espacio exterior de acceso público; los servicios y actividades específicos pueden tener horarios propios."
-          : "Public open-air space; specific services and activities may keep their own hours.",
-    },
+
   };
 }
 
@@ -84,11 +63,11 @@ export function seoTitle(lang: Language): string {
     : `${attraction.fullName} ${attraction.city} — Visitor Guide`;
 }
 
-/** Localized meta description, tuned for SERP click-through (GSC: 0% CTR). */
+/** Localized visitor description. */
 export function seoDescription(lang: Language): string {
   return lang === "es"
-    ? `Guía de visita gratuita al ${attraction.fullName} en ${attraction.city}, junto al Río Limay. Cómo llegar, estacionamiento, servicios, clima en vivo y rutas para recorrer la costanera.`
-    : `Free visitor guide to ${attraction.fullName} in ${attraction.city}, by the Río Limay. How to get there, parking, services, live weather and walking routes for the waterfront.`;
+    ? `Ubicación y mapa del ${attraction.fullName} en ${attraction.city}, junto al Río Limay. Cómo llegar, estacionamiento, servicios, pronóstico y rutas para recorrer la costanera.`
+    : `Location and map of ${attraction.fullName} in ${attraction.city}, by the Río Limay. How to get there, parking, services, weather forecast and walking routes for the waterfront.`;
 }
 
 export { site };

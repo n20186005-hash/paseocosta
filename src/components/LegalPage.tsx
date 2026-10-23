@@ -15,9 +15,10 @@ const legalCopy: Record<Language, Record<LegalKind, LegalContent>> = {
       title: "Tu privacidad, explicada sin vueltas.",
       intro: "Esta página describe qué información mínima puede procesar esta guía, para qué y qué decisiones podés tomar.",
       sections: [
-        ["Información que puede recopilarse", "Solo se procesa la información mínima necesaria para que el sitio funcione y para entender su uso de forma agregada. Esto puede incluir datos técnicos de navegación, como dirección IP, tipo de navegador y páginas visitadas; cookies y tecnologías similares; e información que la persona comparta de manera voluntaria por un canal de contacto."],
-        ["Cómo se utiliza", "La información puede utilizarse para mejorar los contenidos y la experiencia de uso, analizar patrones de tráfico de forma agregada, responder consultas y cumplir obligaciones legales aplicables."],
+        ["Información que puede recopilarse", "Solo se procesa la información mínima necesaria para que el sitio funcione y para entender su uso de forma agregada. Esto puede incluir datos técnicos de navegación, como dirección IP, tipo de navegador y páginas visitadas; cookies y tecnologías similares."],
+        ["Cómo se utiliza", "La información puede utilizarse para mejorar los contenidos y la experiencia de uso, analizar patrones de tráfico de forma agregada, cumplir obligaciones legales aplicables."],
         ["Servicios de terceros", "El sitio puede mostrar un mapa incorporado de Google y, solo si se aceptan las cookies analíticas, utilizar Google Analytics. Cada servicio opera bajo sus propias políticas. Las fotografías conservan los derechos de sus autores."],
+        ["Recursos y alojamiento", "Google Maps y Google Fonts reciben solicitudes del navegador bajo sus políticas. Open-Meteo se consulta desde el servidor para el pronóstico. Cloudflare aloja el sitio y puede inyectar un beacon de rendimiento/RUM, independiente de la elección de Analytics; este control no lo administra. Consultá la documentación de los proveedores enlazada abajo."],
         ["Tus derechos", "De acuerdo con el RGPD y la normativa aplicable, podés solicitar acceso, rectificación o eliminación de datos personales, oponerte a ciertos tratamientos y presentar una queja ante la autoridad competente."],
       ],
     },
@@ -35,11 +36,11 @@ const legalCopy: Record<Language, Record<LegalKind, LegalContent>> = {
     cookies: {
       eyebrow: "Preferencias de navegación",
       title: "Elegí cómo querés recorrer esta guía.",
-      intro: "Las cookies necesarias sostienen las funciones básicas. Las preferencias y la medición analítica se activan solo con tu elección.",
+      intro: "Esta guía ofrece una elección local de medición. La medición analítica se activa con la elección de este panel, guardada en este navegador.",
       sections: [
-        ["Cookies necesarias", "Son imprescindibles para las funciones básicas del sitio y no se pueden desactivar desde este panel."],
+        ["Cookies necesarias", "La lectura de las páginas no requiere una cuenta ni una cookie de idioma. Los proveedores integrados pueden usar sus propias tecnologías."],
         ["Cookies analíticas", "Si las activás, Google Analytics puede recopilar información agregada sobre el uso de las páginas para ayudarnos a comprender qué contenidos son útiles."],
-        ["Cookies de preferencias", "Guardan decisiones como el idioma seleccionado para que la visita siguiente resulte más cómoda."],
+        ["Preferencia local", "El idioma se identifica por la URL. La elección de Analytics se guarda en almacenamiento local; no hay una cookie de idioma."],
         ["Cookies de marketing", "Esta guía no usa cookies de marketing ni muestra anuncios personalizados."],
       ],
     },
@@ -50,9 +51,10 @@ const legalCopy: Record<Language, Record<LegalKind, LegalContent>> = {
       title: "Your privacy, plainly explained.",
       intro: "This page describes the limited information this guide may process, why it does so and which choices you can make.",
       sections: [
-        ["Information that may be collected", "Only the minimum information needed to operate the site and understand its aggregate use may be processed. This can include technical browsing data such as IP address, browser type and visited pages; cookies and similar technologies; and information voluntarily shared through a contact channel."],
-        ["How it is used", "Information may be used to improve content and the visitor experience, analyse aggregate traffic patterns, respond to enquiries and meet applicable legal obligations."],
+        ["Information that may be collected", "Only the minimum information needed to operate the site and understand its aggregate use may be processed. This can include technical browsing data such as IP address, browser type and visited pages; cookies and similar technologies."],
+        ["How it is used", "Information may be used to improve content and the visitor experience, analyse aggregate traffic patterns, meet applicable legal obligations."],
         ["Third-party services", "The site may display an embedded Google map and, only when analytics cookies are accepted, use Google Analytics. Each service operates under its own policy. Photographs remain the property of their respective authors."],
+        ["Resources and hosting", "Google Maps and Google Fonts receive browser requests under their own policies. Open-Meteo is queried by the server for forecasts. Cloudflare hosts this site and may inject a performance/RUM beacon, separate from the Analytics choice; this setting does not control it. See the linked provider documentation below."],
         ["Your rights", "Under the GDPR and applicable rules, you may request access to, correction or deletion of personal data, object to certain processing and lodge a complaint with the relevant authority."],
       ],
     },
@@ -70,11 +72,11 @@ const legalCopy: Record<Language, Record<LegalKind, LegalContent>> = {
     cookies: {
       eyebrow: "Browsing preferences",
       title: "Choose how you would like to use this guide.",
-      intro: "Necessary cookies support core functions. Preferences and analytical measurement are enabled only when you choose them.",
+      intro: "This guide provides a local measurement choice. Analytical measurement starts with the choice below, saved in this browser.",
       sections: [
-        ["Necessary cookies", "These are essential for basic site functions and cannot be disabled from this panel."],
+        ["Necessary cookies", "Reading the pages requires no account or language cookie. Embedded providers may use their own technologies."],
         ["Analytics cookies", "If enabled, Google Analytics may collect aggregate information about page use, helping us understand which content is useful."],
-        ["Preference cookies", "These remember choices such as your selected language so a later visit can feel more comfortable."],
+        ["Local preference", "Language follows the URL. The Analytics choice is saved in local storage; no language cookie is used."],
         ["Marketing cookies", "This guide does not use marketing cookies or display personalised advertising."],
       ],
     },
@@ -88,7 +90,7 @@ export default function LegalPage({ kind, initialLanguage = "es" }: { kind: Lega
 
   return (
     <div className="site-frame legal-frame" lang={language}>
-      <SiteHeader language={language} compact />
+      <SiteHeader language={language} compact topic={kind === "privacy" ? "privacidad" : kind === "terms" ? "terminos" : "cookies"} />
       <main>
         <section className="legal-hero">
           <div className="legal-hero-line" aria-hidden="true"><span /><span /></div>
@@ -96,7 +98,7 @@ export default function LegalPage({ kind, initialLanguage = "es" }: { kind: Lega
           <p className="eyebrow">{content.eyebrow}</p>
           <h1>{content.title}</h1>
           <p className="lede">{content.intro}</p>
-          <p className="legal-update">{language === "es" ? "Última actualización: agosto de 2026" : "Last updated: August 2026"}</p>
+          <p className="legal-update">{language === "es" ? "Última actualización: 23 de octubre de 2026" : "Last updated: 23 October 2026"}</p>
         </section>
         <section className="legal-content">
           <div className="legal-index">
@@ -106,20 +108,16 @@ export default function LegalPage({ kind, initialLanguage = "es" }: { kind: Lega
           <div className="legal-sections">
             {content.sections.map(([heading, text], index) => <article key={heading}><span>{String(index + 1).padStart(2, "0")}</span><div><h2>{heading}</h2><p>{text}</p></div></article>)}
           </div>
+          <p className="source-links"><a href="https://policies.google.com/privacy">Google Privacy</a> · <a href="https://open-meteo.com/en/terms">Open-Meteo</a> · <a href="https://developers.cloudflare.com/web-analytics/data-metrics/data-origin-and-collection/">Cloudflare Web Analytics</a></p>
           {kind === "cookies" && <div className="cookie-panel">
             <div className="cookie-heading"><p className="eyebrow">{language === "es" ? "Panel de consentimiento" : "Consent panel"}</p><h2>{language === "es" ? "Tus preferencias" : "Your preferences"}</h2></div>
-            <CookieRow label={language === "es" ? "Necesarias" : "Necessary"} detail={language === "es" ? "Siempre activas" : "Always active"} active />
-            <CookieRow label={language === "es" ? "Analíticas · Google Analytics" : "Analytics · Google Analytics"} detail={language === "es" ? "Medición agregada y opcional" : "Optional aggregate measurement"} />
-            <CookieRow label={language === "es" ? "Preferencias" : "Preferences"} detail={language === "es" ? "Idioma y ajustes de navegación" : "Language and browsing settings"} active />
-            <p className="cookie-static-note">{language === "es" ? "Las elecciones de consentimiento se gestionan desde los controles del navegador y las políticas del proveedor correspondiente." : "Consent choices are managed through browser controls and the relevant provider’s policies."}</p>
+            <label className="cookie-row" htmlFor="analytics-choice"><span><strong>Google Analytics</strong><small>{language === "es" ? "Opcional; desactivado hasta aceptar" : "Optional; disabled until accepted"}</small></span><input id="analytics-choice" type="checkbox" /></label>
+            <p id="analytics-status" role="status">{language === "es" ? "Podés cambiar esta elección en cualquier momento. Al desactivar se detiene la medición futura y se borran las cookies _ga accesibles desde esta página; los datos ya enviados no se retiran." : "Change this choice at any time. Turning it off stops future measurement and removes _ga cookies accessible from this page; previously sent data cannot be recalled."}</p>
+            <noscript>{language === "es" ? "Se necesita JavaScript para guardar esta elección; Analytics no carga sin JavaScript." : "JavaScript is required to save this choice; Analytics does not load without JavaScript."}</noscript>
           </div>}
         </section>
       </main>
       <SiteFooter language={language} />
     </div>
   );
-}
-
-function CookieRow({ label, detail, active = false }: { label: string; detail: string; active?: boolean }) {
-  return <div className="cookie-row"><div><strong>{label}</strong><small>{detail}</small></div><span className={active ? "toggle on" : "toggle"} aria-label={label}><span /></span></div>;
 }

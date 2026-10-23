@@ -8,34 +8,14 @@ import tailwindcss from "@tailwindcss/vite";
 // OG absolute URLs and sitemap are produced; PUBLIC_SITE overrides when provided.
 const site = process.env.PUBLIC_SITE || "https://paseocosta.com";
 const useCloudflareAdapter = process.argv.includes("build");
-const storageProxy = {
-  name: "manus-storage-proxy",
-  configureServer(server) {
-    server.middlewares.use("/manus-storage", async (req, res) => {
-      const key = req.url?.replace(/^\//, "");
-      const baseUrl = (process.env.BUILT_IN_FORGE_API_URL || "").replace(/\/+$/, "");
-      const token = process.env.BUILT_IN_FORGE_API_KEY;
-      if (!key || !baseUrl || !token) { res.statusCode = 500; res.end("Storage proxy unavailable"); return; }
-      try {
-        const url = new URL("v1/storage/presign/get", `${baseUrl}/`);
-        url.searchParams.set("path", key);
-        const response = await fetch(url, { headers: { Authorization: `Bearer ${token}` } });
-        const payload = await response.json();
-        if (!response.ok || !payload.url) throw new Error("No storage URL");
-        res.writeHead(307, { Location: payload.url, "Cache-Control": "no-store" });
-        res.end();
-      } catch { res.statusCode = 502; res.end("Storage proxy error"); }
-    });
-  },
-};
-
 export default defineConfig({
   site,
   output: "server",
-  adapter: useCloudflareAdapter ? cloudflare() : undefined,
-  integrations: [react(), ...(site ? [sitemap()] : [])],
+  session: false,
+  adapter: useCloudflareAdapter ? cloudflare({ imageService: "passthrough" }) : undefined,
+  integrations: [react(), ...(site ? [sitemap({ serialize(item) { const url = new URL(item.url); if (url.pathname !== "/" && url.pathname !== "/en/") { url.pathname = url.pathname.replace(/\/$/, ""); item.url = url.href; } return item; } })] : [])],
   vite: {
-    plugins: [tailwindcss(), storageProxy],
-    server: { allowedHosts: ["3000-idwb2p6inevodiuwb6v1e-8a5e6e22.us4.manus.computer"] },
+    plugins: [tailwindcss()],
+    build: { assetsInlineLimit: 0 },
   },
 });

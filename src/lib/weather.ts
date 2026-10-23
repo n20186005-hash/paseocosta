@@ -13,6 +13,7 @@ import type { Language } from "../components/SiteShell";
 const TIMEZONE = "America/Argentina/Buenos_Aires";
 
 export interface WeatherObservation {
+  observedAt: string;
   current: {
     temperature: number;
     code: number;
@@ -98,7 +99,9 @@ const WMO: Record<number, WmoInfo> = {
 
 export function wmoInfo(code: number, lang: Language): WmoInfo {
   const info = WMO[code] ?? { label: lang === "es" ? "Tiempo variable" : "Changeable", emoji: "🌡️", cat: "cloud" };
-  return info;
+  if (lang === "es") return info;
+  const labels: Record<number, string> = {0:"Clear",1:"Mainly clear",2:"Partly cloudy",3:"Overcast",45:"Fog",48:"Rime fog",51:"Light drizzle",53:"Drizzle",55:"Dense drizzle",56:"Freezing drizzle",57:"Freezing drizzle",61:"Light rain",63:"Rain",65:"Heavy rain",66:"Freezing rain",67:"Freezing rain",71:"Light snow",73:"Snow",75:"Heavy snow",77:"Snow grains",80:"Rain showers",81:"Rain showers",82:"Heavy showers",85:"Snow showers",86:"Heavy snow showers",95:"Thunderstorm",96:"Thunderstorm with hail",99:"Thunderstorm with hail"};
+  return {...info, label: labels[code] ?? "Changeable"};
 }
 
 /** Convert wind speed (m/s) to the Beaufort scale (0–12). */
@@ -149,39 +152,39 @@ export async function fetchWeather(lat: number, lon: number): Promise<WeatherObs
   const url = buildUrl(lat, lon);
   const g = globalThis as any;
   const cache = g.caches?.default as undefined | { match(k: any): Promise<any>; put(k: any, r: any): Promise<void> };
-  try {
-    if (cache) {
+  if (cache) {
+    try {
       const hit = await cache.match(new Request(url));
-      if (hit) return normalize(await hit.json());
-    }
-    const init: any = { headers: { accept: "application/json" } };
-    if (cache) init.cf = { cacheTtl: 600 };
-    // Bound the upstream call so a slow/unreachable API degrades to the fallback
-    // instead of stalling the request (Cloudflare Workers also enforce their own limit).
-    init.signal = AbortSignal.timeout(8000);
-    const res = await fetch(url, init);
+      if (hit) { const value = normalize(await hit.json()); if (value) return value; }
+    } catch { /* Cache failure must not suppress a valid upstream forecast. */ }
+  }
+  try {
+    const res = await fetch(url, { headers: { accept: "application/json" }, signal: AbortSignal.timeout(6000) });
     if (!res.ok) return null;
     const json = await res.json();
     const obs = normalize(json);
     if (cache && obs) {
-      await cache.put(
-        new Request(url),
-        new Response(JSON.stringify(json), {
-          headers: { "content-type": "application/json", "cache-control": "public, max-age=600" },
-        })
-      );
+      try { await cache.put(new Request(url), new Response(JSON.stringify(json), {
+        headers: { "content-type": "application/json", "cache-control": "public, max-age=600" },
+      })); } catch { /* Serving valid weather does not depend on storing it. */ }
     }
     return obs;
-  } catch {
-    return null;
-  }
+  } catch { return null; }
 }
 
 function normalize(json: any): WeatherObservation | null {
   try {
     const c = json.current;
     const d = json.daily;
+    const currentFields = ["temperature_2m", "weather_code", "relative_humidity_2m", "apparent_temperature", "wind_speed_10m", "wind_gusts_10m", "precipitation", "is_day"];
+    const dailyFields = ["weather_code", "temperature_2m_max", "temperature_2m_min", "precipitation_probability_max", "precipitation_sum", "uv_index_max", "wind_speed_10m_max", "wind_gusts_10m_max"];
+    if (!c || !d || !currentFields.every(k => typeof c[k] === "number" && Number.isFinite(c[k])) ||
+      typeof c.time !== "string" || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(c.time) ||
+      !Array.isArray(d.time) || d.time.length < 1 || d.time.length > 7 ||
+      !d.time.every((v: unknown) => typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v)) ||
+      !dailyFields.every(k => Array.isArray(d[k]) && d[k].length === d.time.length && d[k].every((v: unknown) => typeof v === "number" && Number.isFinite(v)))) return null;
     return {
+      observedAt: c.time + "-03:00",
       current: {
         temperature: Math.round(c.temperature_2m),
         code: c.weather_code,
@@ -218,15 +221,15 @@ function normalize(json: any): WeatherObservation | null {
 const T = {
   es: {
     popHiOutfit: "Probabilidad de lluvia alta: llevá paraguas o poncho.",
-    popHiActivity: "Si llueve, priorizá los tramos cubiertos; las caminatas junto al río convienen posponerse.",
+    popHiActivity: "Si llueve, buscá un refugio adecuado fuera de la orilla y considerá posponer la caminata.",
     popHiGear: "Paraguas o impermeable.",
     lightRainActivity: "Lluvia leve: el piso puede estar resbaladizo, caminá con cuidado.",
     lightRainGear: "Paraguas plegable.",
     heavyRainRisk: "Lluvia intensa: evitá arroyos y la orilla baja del río; las salidas en bote pueden suspenderse.",
     heavyRainActivity: "No es el mejor momento para estar al aire libre; preferí espacios cubiertos.",
     heavyRainGear: "Poncho; evitá el paraguas de palo si hay viento.",
-    thunderRisk: "Tormenta eléctrica: no te refugies bajo árboles ni te acerques al agua; las actividades acuáticas suelen suspenderse.",
-    thunderActivity: "Las propuestas sobre el río probablemente estén cerradas.",
+    thunderRisk: "Tormenta eléctrica prevista: no te refugies bajo árboles ni te acerques al agua.",
+    thunderActivity: "Consultá a los prestadores antes de cualquier actividad; el pronóstico no confirma cierres.",
     heatOutfit: "Hace calor: evitá las horas centrales y usá ropa liviana.",
     heatActivity: "Acortá el tiempo al aire libre al mediodía.",
     heatGear: "Protector solar, gafas y agua.",
@@ -245,19 +248,19 @@ const T = {
     cloudOutfit: "Luz suave, muy buena para fotografiar.",
     cloudActivity: "Sin sol fuerte, cómodo para recorrer mucho rato al aire libre.",
     fogRisk: "Niebla: poca visibilidad; no es el mejor momento para ver el paisaje lejano.",
-    fogGear: "Barbijo si molesta.",
+    fogGear: "Ropa visible y calzado con buen agarre.",
   },
   en: {
     popHiOutfit: "High chance of rain: bring an umbrella or raincoat.",
-    popHiActivity: "If it rains, stick to covered stretches; walks along the river are better postponed.",
+    popHiActivity: "If it rains, find suitable shelter away from the bank and consider postponing the walk.",
     popHiGear: "Umbrella or raincoat.",
     lightRainActivity: "Light rain: paths can be slippery, walk with care.",
     lightRainGear: "Folding umbrella.",
     heavyRainRisk: "Heavy rain: avoid streams and the low riverbank; boat trips may be suspended.",
     heavyRainActivity: "Not the best time to be outdoors; prefer covered spaces.",
     heavyRainGear: "Raincoat; skip the long umbrella if it's windy.",
-    thunderRisk: "Thunderstorm: don't shelter under trees or go near the water; water activities are usually suspended.",
-    thunderActivity: "River-based activities are likely closed.",
+    thunderRisk: "Forecast thunderstorm: do not shelter under trees or go near water.",
+    thunderActivity: "Check with operators before activities; a forecast does not confirm closures.",
     heatOutfit: "It's hot: avoid the midday hours and wear light clothing.",
     heatActivity: "Shorten time outdoors around noon.",
     heatGear: "Sunscreen, sunglasses and water.",
@@ -276,7 +279,7 @@ const T = {
     cloudOutfit: "Soft light, excellent for photography.",
     cloudActivity: "No harsh sun, comfortable for a long outdoor stroll.",
     fogRisk: "Fog: poor visibility; not the best time for distant views.",
-    fogGear: "A mask if it bothers you.",
+    fogGear: "Visible clothing and grippy footwear.",
   },
 } as const;
 
@@ -292,7 +295,6 @@ export function buildAdvice(obs: WeatherObservation, lang: Language): Advice {
   const gear: string[] = [];
   const risks: RiskItem[] = [];
 
-  const curCat = wmoInfo(obs.current.code, lang).cat;
   const dayCat = wmoInfo(obs.today.code, lang).cat;
   const cat = dayCat; // base the day's plan on today's dominant code
   const wind = beaufort(obs.current.windMs);

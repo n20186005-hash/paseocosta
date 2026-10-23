@@ -1,0 +1,9 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const en = Astro.url.pathname.startsWith('/en/');
+Astro.response.status = 404;
+---
+<BaseLayout title={en ? "Page not found | Paseo de la Costa" : "Página no encontrada | Paseo de la Costa"} description={en ? "Return to the Paseo de la Costa visitor guide." : "Volvé a la guía de Paseo de la Costa."} path="/404" lang={en ? "en" : "es-AR"}>
+<meta name="robots" content="noindex" />
+<main class="legal-hero"><h1>{en ? 'Page not found' : 'Página no encontrada'}</h1><a href={en ? '/en/' : '/'}>{en ? 'Back to the guide' : 'Volver a la guía'}</a></main>
+</BaseLayout>

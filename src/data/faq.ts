@@ -9,11 +9,11 @@ export const faq: Record<Language, [string, string][]> = {
   es: [
     [
       "¿Dónde se encuentra Paseo de la Costa?",
-      "Paseo de la Costa se ubica en la ciudad de Neuquén, en la Provincia de Neuquén, Argentina, junto a los ríos Limay y Neuquén.",
+      "Paseo de la Costa se ubica en la ciudad de Neuquén, en la Provincia de Neuquén, Argentina, junto al río Limay y al entorno de Isla 132. El paseo costero más amplio conecta varios sectores; no es una única ruta en la isla.",
     ],
     [
       "¿Se paga entrada?",
-      "No se informa una entrada general para el paseo como espacio público al aire libre. Los eventos y actividades específicas pueden tener sus propias condiciones.",
+      "La Municipalidad informa ingreso libre y gratuito a Isla 132. Los eventos y actividades específicas pueden tener sus propias condiciones.",
     ],
     [
       "¿Cuánto tiempo necesito?",
@@ -37,17 +37,17 @@ export const faq: Record<Language, [string, string][]> = {
     ],
     [
       "¿A qué hora puedo visitarlo?",
-      "Es un espacio exterior de acceso público, disponible durante todo el día. Los servicios y actividades puntuales pueden tener horarios propios; verificá en el lugar.",
+      "No contamos con un horario general confirmado para todos los accesos. Los servicios y actividades puntuales pueden tener horarios propios; verificá en el lugar.",
     ],
   ],
   en: [
     [
       "Where is Paseo de la Costa located?",
-      "Paseo de la Costa is located in the city of Neuquén, in Neuquén Province, Argentina, beside the Limay and Neuquén rivers.",
+      "Paseo de la Costa is located in the city of Neuquén, in Neuquén Province, Argentina, beside the Limay River and Isla 132. The wider waterfront connects several sections; it is not a single island route.",
     ],
     [
       "Is there an admission fee?",
-      "No general entry fee is reported for the promenade as a public open-air space. Individual events and activities may have their own conditions.",
+      "The municipality lists free public entry to Isla 132. Individual events and activities may have their own conditions.",
     ],
     [
       "How long should I allow?",
@@ -71,7 +71,7 @@ export const faq: Record<Language, [string, string][]> = {
     ],
     [
       "What are the visiting hours?",
-      "It is a public open-air space available throughout the day. Specific services and activities may keep their own hours; check on site.",
+      "We have no confirmed general schedule for every access point. Specific services and activities may keep their own hours; check on site.",
     ],
   ],
 };

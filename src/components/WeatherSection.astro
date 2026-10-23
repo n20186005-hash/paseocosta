@@ -12,7 +12,7 @@ const TZ = "America/Argentina/Buenos_Aires";
 const data = await fetchWeather(attraction.lat, attraction.lon);
 const copy = lang === "es"
   ? {
-      eyebrow: "Clima en vivo",
+      eyebrow: "Pronóstico meteorológico",
       marker: "Clima",
       title: `Clima en ${attraction.fullName}, ${attraction.city}`,
       updated: "Actualizado al momento",
@@ -28,7 +28,7 @@ const copy = lang === "es"
       weekday: "es-AR",
     }
   : {
-      eyebrow: "Live weather",
+      eyebrow: "Weather forecast",
       marker: "Weather",
       title: `Weather at ${attraction.fullName}, ${attraction.city}`,
       updated: "Updated just now",
@@ -53,7 +53,7 @@ if (data) {
   const fmt = new Intl.DateTimeFormat(copy.weekday, { weekday: "short", timeZone: TZ });
   days = data.days.map((d) => {
     const info = wmoInfo(d.code, lang);
-    return { label: fmt.format(new Date(`${d.date}T12:00:00`)), emoji: info.emoji, tMax: d.tMax, tMin: d.tMin, pop: d.precipProb };
+    return { label: fmt.format(new Date(`${d.date}T12:00:00-03:00`)), emoji: info.emoji, tMax: d.tMax, tMin: d.tMin, pop: d.precipProb };
   });
   const ci = wmoInfo(data.current.code, lang);
   cur = {
@@ -73,6 +73,8 @@ const hasGear = !!advice && advice.gear.length > 0;
   <div class="section-marker"><span>06</span><i>{copy.marker}</i></div>
   <p class="eyebrow">{copy.eyebrow}</p>
   <h2 id="weather-heading">{copy.title}</h2>
+  <p class="section-lede">{lang === "es" ? "Estimación de modelo, no observación en el paseo ni aviso oficial. No informa caudal, seguridad de baño ni disponibilidad de excursiones." : "Model estimate, not an on-site observation or official warning. It does not report river flow, swimming safety or excursion availability."} <a href="https://open-meteo.com/">Open-Meteo</a> · <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></p>
+  {data && <p>{lang === "es" ? "Hora del dato: " : "Data time: "}<time datetime={data.observedAt}>{new Intl.DateTimeFormat(copy.weekday, {dateStyle:"medium", timeStyle:"short", timeZone:TZ}).format(new Date(data.observedAt))}</time> · UTC−3</p>}
 
   {
     data && cur && advice ? (

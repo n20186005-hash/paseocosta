@@ -16,11 +16,12 @@ const faqSchema = buildFaqSchema(lang);
 <BaseLayout title={seoTitle(lang)} description={seoDescription(lang)} path="/en/" lang="en">
   <script is:inline type="application/ld+json" set:html={JSON.stringify(attractionSchema)} />
   <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-  <Home initialLanguage="en" />
+  <Home initialLanguage="en">
   <WeatherSection lang="en" />
   <ServicesSection lang="en" />
   <TransportSection lang="en" />
   <SeasonalSection lang="en" />
   <RoutesSection lang="en" />
   <ScienceSection lang="en" />
+  </Home>
 </BaseLayout>

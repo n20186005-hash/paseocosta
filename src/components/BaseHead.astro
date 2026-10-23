@@ -1,17 +1,17 @@
 ---
-import { attraction } from "../data/site";
 interface Props { title: string; description: string; path?: string; lang?: "es" | "en"; }
 const { title, description, path = "/", lang = "es" } = Astro.props;
 const canonical = Astro.site ? new URL(path, Astro.site).href : undefined;
 const root = Astro.site ?? new URL("https://paseocosta.com/");
-const esHref = new URL("/", root).href;
-const enHref = new URL("/en/", root).href;
-const imagePath = "/images/paseo-limay-hero-contours.jpg";
+const topic = path.replace(/^\/en(?=\/|$)/, "") || "/";
+const esHref = new URL(topic, root).href;
+const enHref = new URL(topic === "/" ? "/en/" : `/en${topic}`, root).href;
+const imagePath = "/images/social.png";
 const image = Astro.site ? new URL(imagePath, Astro.site).href : undefined;
-const imageAlt = `${attraction.fullName} en ${attraction.city}, ${attraction.country}`;
+const imageAlt = lang === "es" ? "Ilustración conceptual del río para la guía de Paseo de la Costa" : "Conceptual river illustration for the Paseo de la Costa guide";
 ---
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="theme-color" content="#075B73" />
 <meta name="description" content={description} />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="any" />
@@ -33,6 +33,5 @@ const imageAlt = `${attraction.fullName} en ${attraction.city}, ${attraction.cou
 {image && <meta property="og:image" content={image} />}
 {image && <meta property="og:image:alt" content={imageAlt} />}
 <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
-<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-HXM22WWPKP"></script>
-<script is:inline>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-HXM22WWPKP');</script>
+<script is:inline src="/analytics.js"></script>
 <title>{title}</title>

@@ -1,5 +1,5 @@
 /**
- * Design reminder — Cartografía de ribera: real photo reportage leads;
+ * Design reminder — Cartografía de ribera: original river graphics lead;
  * geographic lines, asymmetry, and the Azul Limay signature guide every section.
  */
 import { Accessibility, BusFront, CarFront, ChevronDown, CircleParking, Compass, ExternalLink, Footprints, Fuel, MapPinned, Plane, ShieldAlert, Soup, Star, SunMedium, Ticket, Trees, UsersRound, Waves, Wind } from "lucide-react";
@@ -13,18 +13,18 @@ const siteCopy = {
     heroEyebrow: "Neuquén · Río Limay · Argentina",
     heroTitle: "Paseo de la Costa (Neuquén)",
     heroSubtitle: "Donde la ciudad aprende a caminar con el río.",
-    heroText: "Una guía independiente para descubrir Paseo de la Costa: una ribera pública de baja dificultad donde el paisaje, el movimiento y la pausa se encuentran.",
-    rating: { value: "4.6", count: "28.845", source: "Google Maps" },
+    heroText: "Una guía independiente para descubrir Paseo de la Costa: una zona ribereña de Neuquén, con Isla 132 como referencia y conexión con el paseo costero donde el paisaje, el movimiento y la pausa se encuentran.",
+    rating: { value: "4.6", count: "28.881", source: "Google Maps · 23 Oct 2026" },
     breadcrumb: "Paseo de la Costa · Neuquén · Provincia de Neuquén · Argentina",
-    entityIntro: "Paseo de la Costa, también conocido como Paseo Costero Río Limay, es el paseo ribereño principal de Neuquén. Se extiende junto al río Limay, en el corazón de la ciudad, y funciona como punto de partida para quienes recorren la región.",
+    entityIntro: "Paseo de la Costa, también conocido como Paseo Costero Río Limay, incluye el entorno de Isla 132 dentro del extenso paseo ribereño de Neuquén. Se extiende junto al río Limay, en el corazón de la ciudad, y funciona como punto de partida para quienes recorren la región.",
     phoneLabel: "Teléfono de contacto",
     explore: "Empezá el recorrido",
     seeMap: "Ver ubicación",
-    photoCaption: "Ribera del río Limay · Paseo Costero",
-    facts: [["14 km", "de ribera pública"], ["Baja", "dificultad de senderos"], ["Exterior", "espacio de acceso público"]],
+    photoCaption: "Ilustración del río · no es un mapa",
+    facts: [["Isla 132", "en el paseo costero"], ["Baja", "dificultad de senderos"], ["Exterior", "espacio de acceso público"]],
     atlas: "Cuaderno de ribera",
     introTitle: "Un paseo que sigue el curso del Limay.",
-    intro: "Paseo de la Costa recorre la ribera del río Limay y enlaza distintos tramos de la ciudad de Neuquén. La información pública municipal describe 14 kilómetros de costa, con senderos delimitados, bicisendas, iluminación, miradores, estaciones saludables y zonas para descansar. El trazado tiene baja dificultad y está pensado para la convivencia de peatones y ciclistas.",
+    intro: "Paseo de la Costa recorre la ribera del río Limay y enlaza distintos tramos de la ciudad de Neuquén. La información municipal describe 14 kilómetros para el paseo costero más amplio, no para un circuito único en Isla 132, con senderos delimitados, bicisendas, iluminación, miradores, estaciones saludables y zonas para descansar. El trazado tiene baja dificultad y está pensado para la convivencia de peatones y ciclistas.",
     citation: "Ver fuente municipal",
     riverNote: "El agua es paisaje y también condición cambiante: antes de acercarte a la orilla, observá señalización, clima y estado del sector.",
     noteBy: "Nota de cuidado",
@@ -34,7 +34,7 @@ const siteCopy = {
     bestTitle: "Mejor momento y tiempo sugerido",
     bestText: "Las primeras horas y el final de la tarde suelen ofrecer luz más suave para caminar y observar el río. Para una primera aproximación, reservá entre 60 y 120 minutos; un recorrido en bicicleta o con pausas puede extenderse. En verano, la exposición al sol y las condiciones del río requieren atención extra.",
     costTitle: "Entrada y costos",
-    costText: "El paseo se presenta como espacio público al aire libre y no se informa una entrada general. Las actividades, servicios temporales o eventos pueden tener condiciones propias: consultá su organización antes de participar.",
+    costText: "La Municipalidad informa ingreso libre y gratuito a Isla 132. Las actividades, servicios temporales o eventos pueden tener condiciones propias: consultá su organización antes de participar.",
     amenitiesTitle: "Servicios que conviene ubicar",
     amenityItems: [
       ["Sanitarios", "Hay baños públicos informados en un tramo del Paseo Costero Río Limay cercano al Club Unipol. Su disponibilidad y horario pueden variar."],
@@ -46,7 +46,7 @@ const siteCopy = {
     ],
     mobilityEyebrow: "Cómo llegar",
     mobilityTitle: "Llegar a la ribera, desde lejos o desde la ciudad.",
-    mobilityText: "La referencia del mapa se ubica en el área de Paseo de la Costa junto a los ríos Limay y Neuquén. Elegí tu acceso según el tramo que quieras recorrer.",
+    mobilityText: "La referencia del mapa se ubica en el área de Paseo de la Costa junto al río Limay en Neuquén. Elegí tu acceso según el tramo que quieras recorrer.",
     transport: [
       ["Desde el aeropuerto", "El Aeropuerto Internacional Presidente Perón conecta Neuquén con vuelos nacionales. Desde allí, continuá hacia la ciudad en taxi, remis, vehículo de alquiler o servicio disponible en el día; comprobá el punto de descenso según el acceso elegido."],
       ["Desde la terminal", "La Estación Terminal de Ómnibus de Neuquén recibe servicios de larga distancia. Desde la terminal, verificá las conexiones urbanas vigentes o utilizá taxi/remis para dirigirte al tramo del paseo que te interese."],
@@ -56,7 +56,7 @@ const siteCopy = {
     routeCta: "Abrir en Google Maps",
     mapEyebrow: "Punto de partida",
     mapTitle: "Ubicá tu acceso antes de salir.",
-    mapText: "El Paseo de la Costa es extenso: el mapa señala una referencia sobre la costa. Revisá el entorno y las indicaciones del lugar antes de comenzar.",
+    mapText: "El mapa señala la ficha de Paseo de la Costa en Neuquén, junto a Isla 132. No es el paseo de Plottier ni la ubicación de todos los accesos de la costanera. No contamos con un horario general confirmado; verificá accesos y actividades antes de ir. Revisá el entorno y las indicaciones del lugar antes de comenzar.",
     nearbyEyebrow: "Hitos de la confluencia",
     nearbyTitle: "Sumá paisaje, no una lista de pendientes.",
     nearbyText: "Estos puntos ayudan a leer el entorno de los ríos y la ciudad. Las distancias reales dependen del tramo desde el que inicies el paseo.",
@@ -92,18 +92,18 @@ const siteCopy = {
     heroEyebrow: "Neuquén · Limay River · Argentina",
     heroTitle: "Paseo de la Costa (Neuquén)",
     heroSubtitle: "Where the city learns to walk with the river.",
-    heroText: "An independent guide to Paseo de la Costa: a low-difficulty public riverfront where landscape, movement and pause meet.",
-    rating: { value: "4.6", count: "28,845", source: "Google Maps" },
+    heroText: "An independent guide to Paseo de la Costa: a Neuquén riverfront area centred on Isla 132 within the wider riverside promenade where landscape, movement and pause meet.",
+    rating: { value: "4.6", count: "28,881", source: "Google Maps · 23 Oct 2026" },
     breadcrumb: "Paseo de la Costa · Neuquén · Neuquén Province · Argentina",
-    entityIntro: "Paseo de la Costa, also known as Paseo Costero Río Limay, is the main riverfront promenade of Neuquén. It runs along the Limay River in the heart of the city and serves as a starting point for visitors exploring the region.",
+    entityIntro: "Paseo de la Costa, also known as Paseo Costero Río Limay, includes the Isla 132 area within Neuquén’s wider riverfront promenade. It runs along the Limay River in the heart of the city and serves as a starting point for visitors exploring the region.",
     phoneLabel: "Contact phone",
     explore: "Start the walk",
     seeMap: "View location",
-    photoCaption: "Limay River bank · Paseo Costero",
-    facts: [["14 km", "of public riverbank"], ["Low", "trail difficulty"], ["Open-air", "public-access space"]],
+    photoCaption: "River illustration · not a map",
+    facts: [["Isla 132", "within the waterfront"], ["Low", "trail difficulty"], ["Open-air", "public-access space"]],
     atlas: "River notebook",
     introTitle: "A promenade that follows the Limay's course.",
-    intro: "Paseo de la Costa runs along the Limay River and connects different stretches of Neuquén. Municipal public information describes 14 kilometres of riverbank, with marked trails, cycle paths, lighting, viewpoints, fitness stations and rest areas. The route is low difficulty and is intended for shared use by walkers and cyclists.",
+    intro: "Paseo de la Costa runs along the Limay River and connects different stretches of Neuquén. Municipal information describes 14 kilometres for the wider waterfront, not a single Isla 132 walking loop, with marked trails, cycle paths, lighting, viewpoints, fitness stations and rest areas. The route is low difficulty and is intended for shared use by walkers and cyclists.",
     citation: "View municipal source",
     riverNote: "Water is both landscape and a changing condition: before approaching the bank, check local signage, weather and the state of the area.",
     noteBy: "Care note",
@@ -113,7 +113,7 @@ const siteCopy = {
     bestTitle: "Best time and suggested duration",
     bestText: "Early hours and late afternoon often provide softer light for walking and looking out across the river. Allow 60 to 120 minutes for a first visit; a cycling route or one with pauses may take longer. In summer, sun exposure and river conditions deserve added attention.",
     costTitle: "Admission and costs",
-    costText: "The promenade is presented as an outdoor public space, with no general entry fee indicated. Activities, temporary services or events may have their own conditions—check with their organisers before taking part.",
+    costText: "The municipality lists free public entry to Isla 132. Activities, temporary services or events may have their own conditions—check with their organisers before taking part.",
     amenitiesTitle: "Services worth locating",
     amenityItems: [
       ["Restrooms", "Public restrooms have been reported for a section of Paseo Costero Río Limay near Club Unipol. Availability and hours may change."],
@@ -125,7 +125,7 @@ const siteCopy = {
     ],
     mobilityEyebrow: "Getting there",
     mobilityTitle: "Reach the riverbank, from afar or across the city.",
-    mobilityText: "The map reference sits in the Paseo de la Costa area beside the Limay and Neuquén rivers. Choose your approach according to the section you wish to walk.",
+    mobilityText: "The map reference sits in the Paseo de la Costa area beside the Limay River in Neuquén. Choose your approach according to the section you wish to walk.",
     transport: [
       ["From the airport", "Presidente Perón International Airport connects Neuquén with domestic flights. Continue into the city by taxi, remise, rental vehicle or a service available that day; check your drop-off point for the chosen access."],
       ["From the bus terminal", "Neuquén Bus Terminal receives long-distance services. From the terminal, check current urban connections or use a taxi/remise to reach the promenade section you want."],
@@ -135,7 +135,7 @@ const siteCopy = {
     routeCta: "Open in Google Maps",
     mapEyebrow: "Starting point",
     mapTitle: "Locate your access before you leave.",
-    mapText: "Paseo de la Costa is extensive: the map marks one reference point on the riverbank. Review the surroundings and on-site directions before you start.",
+    mapText: "The map identifies the Paseo de la Costa listing in Neuquén by Isla 132. It does not locate Plottier’s promenade or every waterfront entrance. We have no confirmed general opening schedule; check access and activities before travelling. Review the surroundings and on-site directions before you start.",
     nearbyEyebrow: "Confluence landmarks",
     nearbyTitle: "Add landscape, not another checklist.",
     nearbyText: "These points help you read the setting of river and city. Actual distance depends on the section where you begin the walk.",
@@ -171,7 +171,7 @@ const siteCopy = {
 const amenityIcons = [Accessibility, CircleParking, Soup, UsersRound, Fuel, Footprints];
 const transportIcons = [Plane, BusFront, BusFront, CarFront];
 
-export default function Home({ initialLanguage = "es" }: { initialLanguage?: Language }) {
+export default function Home({ initialLanguage = "es", children }: { initialLanguage?: Language; children?: React.ReactNode }) {
   const language = initialLanguage;
   const c = siteCopy[language];
 
@@ -181,7 +181,7 @@ export default function Home({ initialLanguage = "es" }: { initialLanguage?: Lan
     <SiteHeader language={language} />
     <main id="contenido">
       <section className="hero" id="inicio">
-        <div className="hero-graphics" aria-hidden="true"><img src="/images/paseo-limay-hero-contours.jpg" alt="" /><span className="hero-river-line one" /><span className="hero-river-line two" /></div>
+        <div className="hero-graphics" aria-hidden="true"><svg viewBox="0 0 600 300" aria-hidden="true"><path d="M-50 80 Q200 10 300 160 T650 200 M-50 110 Q200 40 300 190 T650 230 M-50 140 Q200 70 300 220 T650 260" fill="none" stroke="currentColor" opacity=".2" /></svg><span className="hero-river-line one" /><span className="hero-river-line two" /></div>
         <div className="hero-copy">
           <p className="eyebrow"><span className="eyebrow-dot" />{c.heroEyebrow}</p>
           <h1>{c.heroTitle}</h1>
@@ -190,7 +190,7 @@ export default function Home({ initialLanguage = "es" }: { initialLanguage?: Lan
           <p className="hero-rating"><Star size={15} aria-hidden="true" />{c.rating.value}<span>({c.rating.count})</span><small>{c.rating.source}</small></p>
           <div className="hero-actions"><a className="button-solid" href="#visita"><Compass size={17} />{c.explore}</a><a className="button-quiet" href="#ubicacion">{c.seeMap}<span>↘</span></a></div>
         </div>
-        <figure className="hero-photo"><img src="/images/limay-river-autumn.jpg" alt={language === "es" ? "Paseo de la Costa junto al río Limay en Neuquén, Argentina" : "Paseo de la Costa along the Limay River in Neuquén, Argentina"} loading="eager" /><figcaption><span>{c.photoCaption}</span><span>01</span></figcaption></figure>
+        <figure className="hero-photo"><img src="/images/river-illustration.svg" alt={language === "es" ? "Ilustración conceptual de un río con líneas curvas" : "Conceptual illustration of a river with curved lines"} loading="eager" /><figcaption><span>{c.photoCaption}</span><span>01</span></figcaption></figure>
         <div className="hero-facts">{c.facts.map(([big, small]) => <div key={big}><strong>{big}</strong><span>{small}</span></div>)}</div>
       </section>
 
@@ -203,14 +203,14 @@ export default function Home({ initialLanguage = "es" }: { initialLanguage?: Lan
           <a className="source-link" href="https://www.neuquencapital.gov.ar/turismo/paseo-costero-4/" target="_blank" rel="noreferrer">{c.citation}<ExternalLink size={14} /></a>
         </div>
         <div className="river-note"><Waves aria-hidden="true" size={28} /><p>{c.riverNote}</p><small>{c.noteBy}</small></div>
-        <figure className="river-photo"><img src="/images/paseo-limay-vertical.jpg" alt={language === "es" ? "Paseo de la Costa (Neuquén): acceso a la ribera del río Limay" : "Paseo de la Costa (Neuquén): access to the Limay River bank"} /></figure>
+        <figure className="river-photo"><img src="/images/river-illustration.svg" alt={language === "es" ? "Ilustración conceptual de un río con líneas curvas" : "Conceptual illustration of a river with curved lines"} /></figure>
       </section>
 
       <section className="practical-section" id="visita" aria-labelledby="visit-heading">
         <div className="section-heading split-heading"><div><p className="eyebrow">{c.planEyebrow}</p><h2 id="visit-heading">{c.planTitle}</h2></div><p>{c.planText}</p></div>
         <aside className="route-legend" aria-label={c.routeLegend}><ConfluenceMark /><div><strong>{c.routeLegend}</strong><span>{c.routeCondition}</span></div><i>38° 58′ S · 68° 03′ O</i></aside>
-        <div className="practical-ribbon"><img src="/images/paseo-limay-route-ribbon.jpg" alt="" /><div className="timing-card"><SunMedium size={23} /><div><h3>{c.bestTitle}</h3><p>{c.bestText}</p></div></div><div className="cost-card"><Ticket size={21} /><div><h3>{c.costTitle}</h3><p>{c.costText}</p></div></div></div>
-        <div className="amenities-area"><div className="amenities-intro"><p className="eyebrow">{c.atlas}</p><h3>{c.amenitiesTitle}</h3><img src="/images/paseo-limay-amenities-map.jpg" alt="" /></div><div className="amenity-list">{c.amenityItems.map(([title, text], index) => { const Icon = amenityIcons[index]; return <article key={title}><span><Icon size={19} /></span><div><h4>{title}</h4><p>{text}</p></div></article>; })}</div></div>
+        <div className="practical-ribbon"><svg viewBox="0 0 600 300" aria-hidden="true"><path d="M-50 80 Q200 10 300 160 T650 200 M-50 110 Q200 40 300 190 T650 230 M-50 140 Q200 70 300 220 T650 260" fill="none" stroke="currentColor" opacity=".2" /></svg><div className="timing-card"><SunMedium size={23} /><div><h3>{c.bestTitle}</h3><p>{c.bestText}</p></div></div><div className="cost-card"><Ticket size={21} /><div><h3>{c.costTitle}</h3><p>{c.costText}</p></div></div></div>
+        <div className="amenities-area"><div className="amenities-intro"><p className="eyebrow">{c.atlas}</p><h3>{c.amenitiesTitle}</h3><svg viewBox="0 0 600 300" aria-hidden="true"><path d="M-50 80 Q200 10 300 160 T650 200 M-50 110 Q200 40 300 190 T650 230 M-50 140 Q200 70 300 220 T650 260" fill="none" stroke="currentColor" opacity=".2" /></svg></div><div className="amenity-list">{c.amenityItems.map(([title, text], index) => { const Icon = amenityIcons[index]; return <article key={title}><span><Icon size={19} /></span><div><h4>{title}</h4><p>{text}</p></div></article>; })}</div></div>
       </section>
 
       <section className="mobility-section section-flow" aria-labelledby="mobility-heading">
@@ -220,8 +220,8 @@ export default function Home({ initialLanguage = "es" }: { initialLanguage?: Lan
       </section>
 
       <section className="map-section" id="ubicacion" aria-labelledby="map-heading">
-        <div className="map-copy"><p className="eyebrow">{c.mapEyebrow}</p><h2 id="map-heading">{c.mapTitle}</h2><p>{c.mapText}</p><a className="button-solid" href="https://maps.app.goo.gl/rVB9GRmjSuwGKSyJ8" target="_blank" rel="noreferrer"><MapPinned size={17} />{c.routeCta}</a><p className="map-coords">38° 58′ 45″ S · 68° 03′ 22″ O</p><p className="map-phone">{c.phoneLabel}: <a href={`tel:${attraction.phone.replace(/\s+/g, "")}`}>{attraction.phone}</a></p></div>
-        <div className="map-frame"><iframe title="Paseo de la Costa en Neuquén" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5516.618733068807!2d-68.05618952252352!3d-38.97917527170686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x960a32203113e6c7%3A0x1ec9e5b4b83d4aa7!2sPaseo%20de%20la%20Costa!5e1!3m2!1ses-419!2sar!4v1787793759333!5m2!1ses-419!2sar" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen /></div>
+        <div className="map-copy"><p className="eyebrow">{c.mapEyebrow}</p><h2 id="map-heading">{c.mapTitle}</h2><p>{c.mapText}</p><a className="button-solid" href="https://maps.app.goo.gl/rVB9GRmjSuwGKSyJ8" target="_blank" rel="noreferrer"><MapPinned size={17} />{c.routeCta}</a><p className="map-coords">-38.9791753, -68.0536146</p></div>
+        <div className="map-frame"><iframe title={language === "es" ? "Mapa de Paseo de la Costa en Neuquén" : "Map of Paseo de la Costa in Neuquén"} src="https://www.google.com/maps?q=-38.9791753,-68.0536146&output=embed" loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen /></div>
       </section>
 
       <section className="nearby-section" aria-labelledby="nearby-heading">
@@ -230,7 +230,7 @@ export default function Home({ initialLanguage = "es" }: { initialLanguage?: Lan
       </section>
 
       <section className="story-section" aria-labelledby="story-heading">
-        <figure><img src="/images/limay-path-sunset.jpg" alt={language === "es" ? "Atardecer en Paseo de la Costa, ribera del río Limay, Neuquén" : "Sunset at Paseo de la Costa, Limay River bank, Neuquén"} /><figcaption>{c.photoCaption}</figcaption></figure>
+        <figure><img src="/images/river-illustration.svg" alt={language === "es" ? "Ilustración conceptual de un río con líneas curvas" : "Conceptual illustration of a river with curved lines"} /><figcaption>{c.photoCaption}</figcaption></figure>
         <div className="story-copy"><p className="eyebrow">{c.historyEyebrow}</p><h2 id="story-heading">{c.historyTitle}</h2><p>{c.history}</p><blockquote>{c.storyQuote}</blockquote></div>
         <div className="care-card"><Wind size={24} /><h3>{c.careTitle}</h3><ul>{c.care.map((item) => <li key={item}>{item}</li>)}</ul></div>
       </section>
@@ -240,6 +240,8 @@ export default function Home({ initialLanguage = "es" }: { initialLanguage?: Lan
         <div className="faq-list">{faq[language].map(([question, answer], index) => <details key={question} open={index === 0}><summary><span>{String(index + 1).padStart(2, "0")}</span><strong>{question}</strong><ChevronDown size={20} /></summary><div className="faq-answer"><p>{answer}</p></div></details>)}</div>
       </section>
 
+      {children}
+      <p className="photo-credit">{language === "es" ? "Las ilustraciones son gráficos conceptuales originales; no representan un mapa, una fotografía ni el estado actual del paseo." : "The illustrations are original conceptual graphics; they do not represent a map, a photograph or current promenade conditions."}</p>
       <section className="sources-section"><div><ShieldAlert size={23} /><p className="eyebrow">{c.sourceLabel}</p><p>{c.sourceText}</p></div><div className="source-links"><a href={attraction.govtTourismUrl} target="_blank" rel="noreferrer">Municipalidad de Neuquén · Turismo <ExternalLink size={14} /></a><a href="https://www.neuquencapital.gov.ar/prensa/la-municipalidad-incorporo-banos-publicos-al-paseo-costero-rio-limay-en-el-sector-del-barrio-confluencia/" target="_blank" rel="noreferrer">Municipalidad de Neuquén · Prensa <ExternalLink size={14} /></a><a href={attraction.provinceTourismUrl} target="_blank" rel="noreferrer">Turismo Provincia del Neuquén <ExternalLink size={14} /></a><a href="https://www.argentina.gob.ar" target="_blank" rel="noreferrer">Turismo Argentina <ExternalLink size={14} /></a></div></section>
     </main>
     <SiteFooter language={language} />

@@ -1,6 +1,6 @@
 /**
  * Design reminder — Cartografía de ribera: editorial mapping, Limay blue,
- * real photography, asymmetric river-like flow, and calm factual wayfinding.
+ * original illustrations, asymmetric river-like flow, and calm factual wayfinding.
  */
 import { Globe2 } from "lucide-react";
 import { attraction } from "../data/site";
@@ -57,9 +57,9 @@ const copy: Record<Language, ShellCopy> = {
     terms: "Términos",
     cookies: "Cookies",
     disclaimer:
-      "Esta guía independiente y sin fines de lucro no está afiliada a organismos gubernamentales ni a la administración oficial del atractivo.",
+      "Esta guía independiente no está afiliada a organismos gubernamentales ni a la administración oficial del atractivo.",
     references:
-      "Información contrastada con fuentes públicas de la Municipalidad de Neuquén, Turismo Provincia del Neuquén y Turismo de Argentina. No contiene recomendaciones comerciales.",
+      "Información basada en Turismo de la Municipalidad de Neuquén; otros portales se ofrecen como enlaces de consulta. No contiene recomendaciones comerciales.",
     sourceLinks: [
       { label: "Municipalidad de Neuquén", href: attraction.govtTourismUrl },
       { label: "Turismo Provincia del Neuquén", href: attraction.provinceTourismUrl },
@@ -86,9 +86,9 @@ const copy: Record<Language, ShellCopy> = {
     terms: "Terms",
     cookies: "Cookies",
     disclaimer:
-      "This independent, nonprofit guide is not affiliated with any government body or the attraction's official administration.",
+      "This independent guide is not affiliated with any government body or the attraction's official administration.",
     references:
-      "Information is cross-checked against public materials from the Municipality of Neuquén, Neuquén Province Tourism and Argentina Tourism. It contains no commercial recommendations.",
+      "Information is based on municipal Neuquén Tourism; other portals are provided for further checking. It contains no commercial recommendations.",
     sourceLinks: [
       { label: "Municipality of Neuquén", href: attraction.govtTourismUrl },
       { label: "Neuquén Province Tourism", href: attraction.provinceTourismUrl },
@@ -102,19 +102,19 @@ const copy: Record<Language, ShellCopy> = {
   },
 };
 
-export function LanguageSwitch({ language }: { language: Language }) {
+export function LanguageSwitch({ language, topic = "" }: { language: Language; topic?: string }) {
   const c = copy[language];
   return (
     <div className="language-switch" aria-label={c.language}>
       <Globe2 aria-hidden="true" size={16} strokeWidth={1.8} />
-      <a href="/" className={language === "es" ? "is-active" : ""} aria-current={language === "es" ? "page" : undefined}>ES</a>
+      <a href={topic ? `/${topic}` : "/"} className={language === "es" ? "is-active" : ""} aria-current={language === "es" ? "page" : undefined}>ES</a>
       <span aria-hidden="true">/</span>
-      <a href="/en/" className={language === "en" ? "is-active" : ""} aria-current={language === "en" ? "page" : undefined}>EN</a>
+      <a href={topic ? `/en/${topic}` : "/en/"} className={language === "en" ? "is-active" : ""} aria-current={language === "en" ? "page" : undefined}>EN</a>
     </div>
   );
 }
 
-export function SiteHeader({ language, compact = false }: { language: Language; compact?: boolean }) {
+export function SiteHeader({ language, compact = false, topic = "" }: { language: Language; compact?: boolean; topic?: string }) {
   const c = copy[language];
   const homeHref = language === "en" ? "/en/" : "/";
   const nav = compact
@@ -138,9 +138,10 @@ export function SiteHeader({ language, compact = false }: { language: Language; 
       </a>
       <nav className="primary-nav" aria-label={c.navigation}>
         {nav.map((item) => <a key={item.href} href={item.href}>{item.label}</a>)}
-        <div className="nav-language"><LanguageSwitch language={language} /></div>
+        <div className="nav-language"><LanguageSwitch language={language} topic={topic} /></div>
       </nav>
-      <div className="header-tools"><LanguageSwitch language={language} /></div>
+      <details className="mobile-menu"><summary>{c.menu}</summary><nav aria-label={c.navigation}>{nav.map(item => <a key={item.href} href={item.href}>{item.label}</a>)}</nav><div className="mobile-language"><LanguageSwitch language={language} topic={topic} /></div></details>
+      <div className="header-tools"><LanguageSwitch language={language} topic={topic} /></div>
     </header>
   );
 }
