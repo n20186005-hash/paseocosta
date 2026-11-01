@@ -1,0 +1,98 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SiteHeader, SiteFooter } from "./SiteShell";
+import { buildTopicSchemas } from "../lib/schema";
+import { siteUrl } from "../data/site";
+import { GROUP_LABELS, TOPICS, type Topic } from "../data/topics";
+
+interface Props {
+  topic: Topic;
+}
+const { topic } = Astro.props;
+const canonicalPath = "/" + topic.slug;
+const schemas = buildTopicSchemas(topic);
+const lookup: Record<string, Topic> = Object.fromEntries(TOPICS.map((t) => [t.slug, t]));
+const related = (topic.related ?? [])
+  .map((slug) => ({ slug, t: lookup[slug] }))
+  .filter((r) => r.t) as { slug: string; t: Topic }[];
+---
+<BaseLayout
+  title={topic.title}
+  description={topic.description}
+  path={canonicalPath}
+  lang="es-AR"
+  alternates={[
+    { lang: "es", href: siteUrl(canonicalPath) },
+    { lang: "x-default", href: siteUrl(canonicalPath) },
+  ]}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(schemas)} />
+  <div class="site-frame">
+    <SiteHeader language="es" base="/" topic="" />
+    <main id="contenido" class="topic-main">
+      <article class="topic-article">
+        <nav class="topic-breadcrumb" aria-label="Ruta de navegación">
+          <a href="/">Inicio</a>
+          <span aria-hidden="true">/</span>
+          <span>{topic.content.h1}</span>
+        </nav>
+        <header class="topic-hero">
+          <p class="eyebrow">{GROUP_LABELS[topic.group]}</p>
+          <h1>{topic.content.h1}</h1>
+          <p class="lede">{topic.content.lead}</p>
+          <p class="topic-updated">Actualizado: {topic.content.updated}</p>
+        </header>
+
+        <div class="topic-sections">
+          {topic.content.sections.map((sec) => (
+            <section class="topic-section">
+              <h2>{sec.heading}</h2>
+              {sec.paragraphs?.map((p) => <p>{p}</p>)}
+              {sec.bullets && sec.bullets.length > 0 && (
+                <ul class="topic-bullets">
+                  {sec.bullets.map((b) => <li>{b}</li>)}
+                </ul>
+              )}
+              {sec.callout && (
+                <aside class="info-note">
+                  <p>{sec.callout}</p>
+                </aside>
+              )}
+            </section>
+          ))}
+        </div>
+
+        {topic.content.faq.length > 0 && (
+          <section class="topic-faq" id="preguntas" aria-labelledby="faq-heading">
+            <h2 id="faq-heading">Preguntas frecuentes</h2>
+            <div class="faq-list">
+              {topic.content.faq.map((f) => (
+                <details class="faq-item">
+                  <summary>{f.q}</summary>
+                  <p>{f.a}</p>
+                </details>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {related.length > 0 && (
+          <section class="topic-related" aria-labelledby="related-heading">
+            <h2 id="related-heading">Guías relacionadas</h2>
+            <ul class="related-cards">
+              {related.map((r) => (
+                <li>
+                  <a href={`/${r.slug}`}>
+                    <span class="related-label">{r.t.content.linkLabel}</span>
+                    <span class="related-group">{GROUP_LABELS[r.t.group]}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+      </article>
+    </main>
+    <SiteFooter language="es" />
+  </div>
+</BaseLayout>

@@ -1,12 +1,12 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import "../styles/global.css";
-interface Props { title: string; description: string; path?: string; lang?: string; }
-const { title, description, path, lang = "es-AR" } = Astro.props;
+interface Props { title: string; description: string; path?: string; lang?: string; alternates?: { lang: string; href: string }[]; }
+const { title, description, path, lang = "es-AR", alternates } = Astro.props;
 ---
 <!doctype html>
 <html lang={lang}>
-  <head><BaseHead title={title} description={description} path={path} lang={lang === "en" ? "en" : "es"} /></head>
+  <head><BaseHead title={title} description={description} path={path} lang={lang === "en" ? "en" : "es"} alternates={alternates} /></head>
   <body>
     <slot />
     <script is:inline src="/site-controls.js"></script>

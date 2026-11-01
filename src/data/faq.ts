@@ -33,7 +33,7 @@ export const faq: Record<Language, [string, string][]> = {
     ],
     [
       "¿Hay comida o estacionamiento?",
-      "Hay servicios urbanos en las cercanías y zonas de estacionamiento en distintos accesos, pero la oferta y la capacidad pueden variar. Esta guía no recomienda negocios concretos.",
+      "Hay servicios urbanos en las cercanías y zonas de estacionamiento en distintos accesos, pero la oferta y la capacidad pueden variar. En la guía de dónde comer reunimos opciones por tipo y zona; verificá siempre horarios y datos con cada local.",
     ],
     [
       "¿A qué hora puedo visitarlo?",
@@ -67,7 +67,7 @@ export const faq: Record<Language, [string, string][]> = {
     ],
     [
       "Are there food options or parking?",
-      "There are urban services nearby and parking areas at different access points, but offer and capacity can change. This guide does not recommend specific businesses.",
+      "There are urban services nearby and parking areas at different access points, but offer and capacity can change. The where-to-eat guide gathers options by type and area; always confirm hours and details with each venue.",
     ],
     [
       "What are the visiting hours?",

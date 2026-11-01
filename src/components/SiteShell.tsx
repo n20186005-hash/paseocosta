@@ -114,7 +114,7 @@ export function LanguageSwitch({ language, topic = "" }: { language: Language; t
   );
 }
 
-export function SiteHeader({ language, compact = false, topic = "" }: { language: Language; compact?: boolean; topic?: string }) {
+export function SiteHeader({ language, compact = false, topic = "", base = "" }: { language: Language; compact?: boolean; topic?: string; base?: string }) {
   const c = copy[language];
   const homeHref = language === "en" ? "/en/" : "/";
   const nav = compact
@@ -128,7 +128,10 @@ export function SiteHeader({ language, compact = false, topic = "" }: { language
         { label: c.routes, href: "#rutas" },
         { label: c.map, href: "#ubicacion" },
         { label: c.faq, href: "#preguntas" },
-      ];
+      ].map((item) => ({
+        label: item.label,
+        href: item.href.startsWith("#") ? `${base}${item.href}` : item.href,
+      }));
 
   return (
     <header className="site-header">

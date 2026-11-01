@@ -1,0 +1,24 @@
+---
+import { topicsByGroup } from "../data/topics";
+const groups = topicsByGroup();
+---
+<section class="topic-cluster section-flow" id="guias" aria-labelledby="guias-heading">
+  <p class="eyebrow">Guías de la ribera</p>
+  <h2 id="guias-heading">Profundizá tu visita</h2>
+  <p class="cluster-intro">
+    Respuestas a las dudas más frecuentes antes de salir: accesos, estacionamiento,
+    río Limay, dónde comer y cómo recorrer la costanera.
+  </p>
+  <div class="cluster-groups">
+    {groups.map((g) => (
+      <div class="cluster-group">
+        <h3>{g.label}</h3>
+        <ul class="cluster-list">
+          {g.topics.map((t) => (
+            <li><a href={`/${t.slug}`}>{t.content.linkLabel}</a></li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</section>

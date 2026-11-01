@@ -1,4 +1,5 @@
 import type { Language } from "../components/SiteShell";
+import type { Topic } from "../data/topics";
 import { attraction, site, siteUrl, heroImageUrl } from "../data/site";
 import { faq } from "../data/faq";
 
@@ -56,18 +57,72 @@ export function buildFaqSchema(lang: Language) {
   };
 }
 
-/** Localized SEO <title> following the "attraction + city + visitor guide" pattern. */
+/** Localized SEO <title>. The Spanish title targets the verified GSC queries. */
 export function seoTitle(lang: Language): string {
   return lang === "es"
-    ? `${attraction.fullName} ${attraction.city} — Guía de visita`
+    ? "Paseo de la Costa Neuquén: mapa, acceso y qué hacer"
     : `${attraction.fullName} ${attraction.city} — Visitor Guide`;
 }
 
 /** Localized visitor description. */
 export function seoDescription(lang: Language): string {
   return lang === "es"
-    ? `Ubicación y mapa del ${attraction.fullName} en ${attraction.city}, junto al Río Limay. Cómo llegar, estacionamiento, servicios, pronóstico y rutas para recorrer la costanera.`
+    ? "Mapa de accesos, Isla 132, estacionamiento, recorridos, cafeterías y restaurantes junto al río Limay. Guía independiente para visitar Paseo de la Costa."
     : `Location and map of ${attraction.fullName} in ${attraction.city}, by the Río Limay. How to get there, parking, services, weather forecast and walking routes for the waterfront.`;
+}
+
+/**
+ * Builds the JSON-LD for a long-tail topic page: WebPage + BreadcrumbList +
+ * FAQPage. The WebPage is about the TouristAttraction entity but deliberately
+ * does not carry a third-party AggregateRating.
+ */
+export function buildTopicSchemas(topic: Topic) {
+  const pageUrl = siteUrl("/" + topic.slug);
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${pageUrl}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Inicio",
+        item: siteUrl("/"),
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: topic.content.h1,
+        item: pageUrl,
+      },
+    ],
+  };
+
+  const faqPage = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: topic.content.faq.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+
+  const webPage = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${pageUrl}#webpage`,
+    url: pageUrl,
+    name: topic.title,
+    description: topic.description,
+    inLanguage: "es-AR",
+    isPartOf: { "@type": "WebSite", "@id": `${siteUrl()}/#website` },
+    about: { "@type": "TouristAttraction", "@id": `${siteUrl()}/#attraction` },
+    breadcrumb: { "@type": "BreadcrumbList", "@id": `${pageUrl}#breadcrumb` },
+    mainEntity: faqPage,
+  };
+
+  return [webPage, breadcrumb, faqPage];
 }
 
 export { site };

@@ -30,7 +30,7 @@ export const attraction = {
   mapsEmbedSrc:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5516.618733068807!2d-68.0536146!3d-38.9791753!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x960a32203113e6c7%3A0x1ec9e5b4b83d4aa7!2sPaseo%20de%20la%20Costa!5e1!3m2!1ses-419!2sar!4v1787793759333!5m2!1ses-419!2sar",
   ratingValue: 4.6,
-  ratingCount: 28881,
+  ratingCount: 28899,
   nearbyLandmark1: "Isla 132",
   nearbyLandmark2: "Confluencia de los ríos Limay y Neuquén",
   /** Official municipal tourism page for the promenade. */

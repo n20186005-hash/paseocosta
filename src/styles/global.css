@@ -177,6 +177,44 @@ p { font-size: .94rem; line-height: 1.8; }
 .photo-credit a { text-decoration: underline; }
 .hero-graphics > svg { width: 100%; height: 100%; }
 .practical-ribbon > svg { width: 100%; min-width: 0; }
+
+/* ───────── Topic long-tail pages ───────── */
+.topic-main { padding: 0 clamp(1.1rem, 6vw, 5rem) 3rem; }
+.topic-article { max-width: 68rem; margin: 0 auto; }
+.topic-breadcrumb { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; font-size: .72rem; letter-spacing: .03em; color: #557077; padding: 2.2rem 0 1rem; }
+.topic-breadcrumb a { color: #075b73; text-decoration: underline; }
+.topic-hero { border-bottom: 1px solid #d4d0c6; padding-bottom: 2rem; margin-bottom: 2.2rem; }
+.topic-hero .eyebrow { color: #b56b40; }
+.topic-hero h1 { font-family: "Newsreader", Georgia, serif; font-weight: 600; letter-spacing: -.03em; font-size: clamp(1.9rem, 4.4vw, 3rem); line-height: 1.04; margin: .5rem 0 .9rem; color: #12323b; }
+.topic-hero .lede { max-width: 44rem; font-size: 1.02rem; line-height: 1.7; color: #42616a; margin: 0 0 1.1rem; }
+.topic-updated { font-size: .72rem; letter-spacing: .04em; color: #557077; }
+.topic-section { margin: 0 0 2rem; }
+.topic-section h2 { font-family: "Newsreader", Georgia, serif; font-weight: 500; letter-spacing: -.02em; font-size: 1.5rem; line-height: 1.15; margin: 0 0 1rem; color: #12323b; }
+.topic-section p { font-size: .92rem; line-height: 1.75; color: #2c4951; margin: 0 0 1rem; }
+.topic-bullets { margin: 0 0 1rem; padding-left: 1.2rem; display: grid; gap: .45rem; }
+.topic-bullets li { font-size: .9rem; line-height: 1.6; color: #2c4951; }
+.topic-section .info-note { margin-top: 0; }
+.topic-faq { margin: 2.5rem 0; padding-top: 1.5rem; border-top: 1px solid #d4d0c6; }
+.topic-faq h2 { font-family: "Newsreader", Georgia, serif; font-weight: 500; letter-spacing: -.02em; font-size: 1.6rem; margin: 0 0 1.2rem; color: #12323b; }
+.topic-faq .faq-list details { border-color: #c8c5be; }
+.topic-faq .faq-list summary strong { font-size: 1.2rem; }
+.topic-faq .faq-list details .faq-answer > p { padding-left: 0; color: #2c4951; }
+.topic-related { margin: 2.5rem 0 0; padding-top: 1.5rem; border-top: 1px solid #d4d0c6; }
+.topic-related h2 { font-family: "Newsreader", Georgia, serif; font-weight: 500; letter-spacing: -.02em; font-size: 1.5rem; margin: 0 0 1.2rem; color: #12323b; }
+.related-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+.related-cards a { display: flex; flex-direction: column; gap: .3rem; background: #fffaf0; border: 1px solid rgba(7,91,115,.14); padding: 1.1rem 1.2rem; transition: border-color .18s ease; }
+.related-cards a:hover { border-color: #075b73; }
+.related-label { font-family: "Newsreader", Georgia, serif; font-size: 1.12rem; color: #12323b; }
+.related-group { font-size: .66rem; letter-spacing: .08em; text-transform: uppercase; color: #b56b40; }
+.topic-cluster { background: #fffaf0; border: 1px solid rgba(7,91,115,.12); padding: 2.2rem clamp(1.1rem, 4vw, 3rem); margin: 2.5rem 0; }
+.topic-cluster .eyebrow { color: #b56b40; }
+.topic-cluster h2 { font-family: "Newsreader", Georgia, serif; font-weight: 600; letter-spacing: -.02em; font-size: clamp(1.6rem, 3.4vw, 2.2rem); margin: .4rem 0 1rem; color: #12323b; }
+.cluster-intro { max-width: 44rem; color: #42616a; font-size: .92rem; line-height: 1.7; margin: 0 0 1.8rem; }
+.cluster-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.6rem 2rem; }
+.cluster-group h3 { font-family: "Manrope", sans-serif; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: #557077; margin: 0 0 .8rem; padding-bottom: .5rem; border-bottom: 1px solid #d4d0c6; }
+.cluster-list { list-style: none; margin: 0; padding: 0; display: grid; gap: .55rem; }
+.cluster-list a { color: #075b73; font-size: .9rem; line-height: 1.4; text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 760px) { .cluster-groups { grid-template-columns: 1fr; } .related-cards { grid-template-columns: 1fr; } }
 .amenities-intro > svg { width: 100%; height: 140px; }
 .mobile-menu { display: none; }
 .cookie-row input { width: 1.5rem; height: 1.5rem; accent-color: #075b73; }

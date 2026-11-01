@@ -1,0 +1,17 @@
+---
+import TopicPage from "../../components/TopicPage.astro";
+import { getTopic, TOPICS } from "../../data/topics";
+
+export function getStaticPaths() {
+  return TOPICS.filter((t) => t.slug.startsWith("cerca/")).map((t) => ({
+    params: { slug: t.slug.split("/")[1] },
+  }));
+}
+
+const { slug } = Astro.params;
+const topic = getTopic(`cerca/${slug as string}`);
+if (!topic) {
+  return Astro.redirect("/404");
+}
+---
+<TopicPage topic={topic} />
