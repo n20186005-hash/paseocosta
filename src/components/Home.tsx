@@ -20,7 +20,10 @@ const siteCopy = {
     phoneLabel: "Teléfono de contacto",
     explore: "Empezá el recorrido",
     seeMap: "Ver ubicación",
-    photoCaption: "Ilustración del río · no es un mapa",
+    photoCaption: "Ribera del río Limay · fotografía de archivo",
+    signCaption: "Paseo Limay · fotografía de archivo",
+    sunsetCaption: "Sendero ribereño al atardecer · fotografía de archivo",
+    photoCopyright: "Los derechos de autor pertenecen a sus fotógrafos.",
     facts: [["Isla 132", "en el paseo costero"], ["Baja", "dificultad de senderos"], ["Exterior", "espacio de acceso público"]],
     atlas: "Cuaderno de ribera",
     introTitle: "Un paseo que sigue el curso del Limay.",
@@ -99,7 +102,10 @@ const siteCopy = {
     phoneLabel: "Contact phone",
     explore: "Start the walk",
     seeMap: "View location",
-    photoCaption: "River illustration · not a map",
+    photoCaption: "Limay River bank · archival photograph",
+    signCaption: "Paseo Limay · archival photograph",
+    sunsetCaption: "Riverside path at sunset · archival photograph",
+    photoCopyright: "Copyright belongs to the photographers.",
     facts: [["Isla 132", "within the waterfront"], ["Low", "trail difficulty"], ["Open-air", "public-access space"]],
     atlas: "River notebook",
     introTitle: "A promenade that follows the Limay's course.",
@@ -190,7 +196,7 @@ export default function Home({ initialLanguage = "es", children }: { initialLang
           <p className="hero-rating"><Star size={15} aria-hidden="true" />{c.rating.value}<span>({c.rating.count})</span><small>{c.rating.source}</small></p>
           <div className="hero-actions"><a className="button-solid" href="#visita"><Compass size={17} />{c.explore}</a><a className="button-quiet" href="#ubicacion">{c.seeMap}<span>↘</span></a></div>
         </div>
-        <figure className="hero-photo"><img src="/images/river-illustration.svg" alt={language === "es" ? "Ilustración conceptual de un río con líneas curvas" : "Conceptual illustration of a river with curved lines"} loading="eager" /><figcaption><span>{c.photoCaption}</span><span>01</span></figcaption></figure>
+        <figure className="hero-photo"><img src="/images/limay-river-autumn.jpg" alt={language === "es" ? "Ribera arbolada del río Limay en Neuquén" : "Tree-lined bank of the Limay River in Neuquén"} loading="eager" /><figcaption><span>{c.photoCaption}</span><span>{c.photoCopyright}</span></figcaption></figure>
         <div className="hero-facts">{c.facts.map(([big, small]) => <div key={big}><strong>{big}</strong><span>{small}</span></div>)}</div>
       </section>
 
@@ -203,7 +209,7 @@ export default function Home({ initialLanguage = "es", children }: { initialLang
           <a className="source-link" href="https://www.neuquencapital.gov.ar/turismo/paseo-costero-4/" target="_blank" rel="noreferrer">{c.citation}<ExternalLink size={14} /></a>
         </div>
         <div className="river-note"><Waves aria-hidden="true" size={28} /><p>{c.riverNote}</p><small>{c.noteBy}</small></div>
-        <figure className="river-photo"><img src="/images/river-illustration.svg" alt={language === "es" ? "Ilustración conceptual de un río con líneas curvas" : "Conceptual illustration of a river with curved lines"} /></figure>
+        <figure className="river-photo"><picture><source media="(min-width: 761px)" srcSet="/images/paseo-limay-sign.jpeg" /><img src="/images/paseo-limay-vertical.jpg" alt={language === "es" ? "Letras de Paseo Limay junto a la ribera" : "Paseo Limay sign by the riverside"} loading="lazy" /></picture><figcaption>{c.signCaption} · {c.photoCopyright}</figcaption></figure>
       </section>
 
       <section className="practical-section" id="visita" aria-labelledby="visit-heading">
@@ -230,7 +236,7 @@ export default function Home({ initialLanguage = "es", children }: { initialLang
       </section>
 
       <section className="story-section" aria-labelledby="story-heading">
-        <figure><img src="/images/river-illustration.svg" alt={language === "es" ? "Ilustración conceptual de un río con líneas curvas" : "Conceptual illustration of a river with curved lines"} /><figcaption>{c.photoCaption}</figcaption></figure>
+        <figure><img src="/images/limay-path-sunset.jpg" alt={language === "es" ? "Sendero junto al río Limay al atardecer" : "Path beside the Limay River at sunset"} loading="lazy" /><figcaption>{c.sunsetCaption} · {c.photoCopyright}</figcaption></figure>
         <div className="story-copy"><p className="eyebrow">{c.historyEyebrow}</p><h2 id="story-heading">{c.historyTitle}</h2><p>{c.history}</p><blockquote>{c.storyQuote}</blockquote></div>
         <div className="care-card"><Wind size={24} /><h3>{c.careTitle}</h3><ul>{c.care.map((item) => <li key={item}>{item}</li>)}</ul></div>
       </section>
@@ -241,7 +247,6 @@ export default function Home({ initialLanguage = "es", children }: { initialLang
       </section>
 
       {children}
-      <p className="photo-credit">{language === "es" ? "Las ilustraciones son gráficos conceptuales originales; no representan un mapa, una fotografía ni el estado actual del paseo." : "The illustrations are original conceptual graphics; they do not represent a map, a photograph or current promenade conditions."}</p>
       <section className="sources-section"><div><ShieldAlert size={23} /><p className="eyebrow">{c.sourceLabel}</p><p>{c.sourceText}</p></div><div className="source-links"><a href={attraction.govtTourismUrl} target="_blank" rel="noreferrer">Municipalidad de Neuquén · Turismo <ExternalLink size={14} /></a><a href="https://www.neuquencapital.gov.ar/prensa/la-municipalidad-incorporo-banos-publicos-al-paseo-costero-rio-limay-en-el-sector-del-barrio-confluencia/" target="_blank" rel="noreferrer">Municipalidad de Neuquén · Prensa <ExternalLink size={14} /></a><a href={attraction.provinceTourismUrl} target="_blank" rel="noreferrer">Turismo Provincia del Neuquén <ExternalLink size={14} /></a><a href="https://www.argentina.gob.ar" target="_blank" rel="noreferrer">Turismo Argentina <ExternalLink size={14} /></a></div></section>
     </main>
     <SiteFooter language={language} />
